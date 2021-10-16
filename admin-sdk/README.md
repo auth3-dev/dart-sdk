@@ -16,7 +16,17 @@ Our libraries can be run on all environments including:
 
 ## Installation
 
-Please check sub-folders' README.md for additional installation instructions, selecting the library you wish to use.
+Add to your `pubspec.yaml`: 
+
+```yaml
+auth3_admin_sdk: 1.0.0
+```
+
+Then run:
+
+```
+pub get
+````
 
 ### Additional help
 
@@ -31,7 +41,6 @@ Not your target language? Check out our official SDKs for:
   * [java](https://github.com/auth3-dev/admin-sdk)
   * [nodejs](https://github.com/auth3-dev/nodejs-sdk)
   * [dart](https://github.com/auth3-dev/dart-sdk)
-  * [dart](https://github.com/auth3-dev/dart-sdk)
   * [python](https://github.com/auth3-dev/python-sdk)
   * [php](https://github.com/auth3-dev/php-sdk)
   * [ruby](https://github.com/auth3-dev/ruby-sdk)
@@ -39,7 +48,7 @@ Not your target language? Check out our official SDKs for:
   * [scala](https://github.com/auth3-dev/scala-sdk)
   * [swift](https://github.com/auth3-dev/swift-sdk)
   * [c#](https://github.com/auth3-dev/csharp-sdk)
-
+  
 ## Contributing
 
 At this time we don't accept external contributions, but we're open for feedbacks and requests. We're always looking for contributions on our security, refer to [our dedicated page](https://auth3.dev/bounty-program?utm_source=github&utm_medium=sdk&utm_campaign=dart-admin) for more.
