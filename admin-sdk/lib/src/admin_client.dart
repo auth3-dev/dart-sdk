@@ -4,16 +4,12 @@ import 'package:grpc/service_api.dart'
 import 'package:auth3_admin_sdk/src/client_singleton_stub.dart'
     if (dart.library.io) 'package:auth3_admin_sdk/src/client_singleton.dart'
     if (dart.library.html) 'package:auth3_admin_sdk/src/client_singleton_web.dart';
-import 'package:auth3_admin_sdk/src/generated/admin.pb.dart';
 import 'package:auth3_admin_sdk/src/generated/admin.pbgrpc.dart' as grpc_api;
 import 'package:auth3_admin_sdk/src/generated/google/protobuf/struct.pb.dart'
     as structpb;
 
 // Export types
 export 'package:auth3_admin_sdk/src/generated/admin.pbgrpc.dart';
-
-// Needed to allow clients to handle errors.
-export 'package:grpc/grpc_web.dart' show GrpcError, StatusCode;
 
 structpb.Struct _mapToStruct(Map<String, dynamic> data) {
   // Ref: https://github.com/dart-lang/protobuf/issues/288
@@ -37,7 +33,7 @@ structpb.Struct _mapToStruct(Map<String, dynamic> data) {
 /// You can use [AdminClient] on web platforms like this:
 ///
 /// ```dart
-/// var example = AdminClient(url: "https://" + MY_PROJECT_ID + '.api.auth3.dev', token: '<token>');
+/// var example = AdminClient(url: 'https://' + MY_PROJECT_ID + '.api.auth3.dev', token: '<token>');
 /// var result = example.getConnections();
 /// ```
 class AdminClient {
@@ -49,12 +45,13 @@ class AdminClient {
   /// changed from the last time you called it.
   AdminClient({this.url, this.token});
 
-  get options {
+  CallOptions get options {
     return token?.isNotEmpty == true
         ? CallOptions(metadata: {'authorization': 'bearer $token'})
         : null;
   }
 
+  /// Please refer to https://docs.auth3.dev/apis/identity-platform/administrative#getconnections
   Future<grpc_api.GetConnectionsResponse> getConnections() async {
     var client = grpc_api.AdminClient(GrpcClientSingleton(url: url).client);
 
@@ -63,6 +60,7 @@ class AdminClient {
     return await client.getConnections(data, options: options);
   }
 
+  /// Please refer to https://docs.auth3.dev/apis/identity-platform/administrative#createidentity
   Future<grpc_api.CreateIdentityResponse> createIdentity(
       {String schemaId, String connectionId, Map<String, dynamic> data}) async {
     var client = grpc_api.AdminClient(GrpcClientSingleton(url: url).client);
@@ -75,6 +73,7 @@ class AdminClient {
     return await client.createIdentity(request, options: options);
   }
 
+  /// Please refer to https://docs.auth3.dev/apis/identity-platform/administrative#deleteconnection
   Future<grpc_api.DeleteConnectionResponse> deleteConnection({
     String id,
   }) async {
@@ -86,6 +85,7 @@ class AdminClient {
     return await client.deleteConnection(data, options: options);
   }
 
+  /// Please refer to https://docs.auth3.dev/apis/identity-platform/administrative#createconnection
   Future<grpc_api.CreateConnectionResponse> createConnection({
     String name,
     String clientId,
@@ -101,13 +101,13 @@ class AdminClient {
 
     var data = grpc_api.CreateConnectionRequest();
     data.name = name;
-    data.clientId = clientId ?? "";
-    data.clientSecret = clientSecret ?? "";
-    data.buttonImageUrl = buttonImageUrl ?? "";
+    data.clientId = clientId ?? '';
+    data.clientSecret = clientSecret ?? '';
+    data.buttonImageUrl = buttonImageUrl ?? '';
     data.provider =
         provider ?? grpc_api.CreateConnectionRequest_Providers.values.first;
-    data.oidcDiscoveryUrl = oidcDiscoveryUrl ?? "";
-    data.scopes = scopes ?? "";
+    data.oidcDiscoveryUrl = oidcDiscoveryUrl ?? '';
+    data.scopes = scopes ?? '';
 
     if (mfa?.isNotEmpty == true) {
       data.mfa.addAll(mfa);
@@ -118,6 +118,7 @@ class AdminClient {
     return await client.createConnection(data, options: options);
   }
 
+  /// Please refer to https://docs.auth3.dev/apis/identity-platform/administrative#updateconnection
   Future<grpc_api.UpdateConnectionResponse> updateConnection({
     String id,
     String name,
@@ -133,15 +134,15 @@ class AdminClient {
     var client = grpc_api.AdminClient(GrpcClientSingleton(url: url).client);
 
     var data = grpc_api.UpdateConnectionRequest();
-    data.id = id ?? "";
+    data.id = id ?? '';
     data.name = name;
-    data.clientId = clientId ?? "";
-    data.clientSecret = clientSecret ?? "";
-    data.buttonImageUrl = buttonImageUrl ?? "";
+    data.clientId = clientId ?? '';
+    data.clientSecret = clientSecret ?? '';
+    data.buttonImageUrl = buttonImageUrl ?? '';
     data.provider =
         provider ?? grpc_api.UpdateConnectionRequest_Providers.values.first;
-    data.oidcDiscoveryUrl = oidcDiscoveryUrl ?? "";
-    data.scopes = scopes ?? "";
+    data.oidcDiscoveryUrl = oidcDiscoveryUrl ?? '';
+    data.scopes = scopes ?? '';
 
     if (mfa?.isNotEmpty == true) {
       data.mfa.addAll(mfa);
@@ -152,12 +153,14 @@ class AdminClient {
     return await client.updateConnection(data, options: options);
   }
 
+  /// Please refer to https://docs.auth3.dev/apis/identity-platform/administrative#getoauth2clients
   Future<grpc_api.GetOAuth2ClientsResponse> getOAuth2Clients() async {
     var client = grpc_api.AdminClient(GrpcClientSingleton(url: url).client);
     var data = grpc_api.GetOAuth2ClientsRequest();
     return await client.getOAuth2Clients(data, options: options);
   }
 
+  /// Please refer to https://docs.auth3.dev/apis/identity-platform/administrative#createoauth2clients
   Future<grpc_api.CreateOAuth2ClientResponse> createOAuth2Client({
     List<String> allowedCorsOrigins,
     List<String> audience,
@@ -240,6 +243,7 @@ class AdminClient {
     return await client.createOAuth2Client(data, options: options);
   }
 
+  /// Please refer to https://docs.auth3.dev/apis/identity-platform/administrative#updateoauth2clients
   Future<grpc_api.UpdateOAuth2ClientResponse> updateOAuth2Client({
     List<String> allowedCorsOrigins,
     List<String> audience,
@@ -322,6 +326,7 @@ class AdminClient {
     return await client.updateOAuth2Client(data, options: options);
   }
 
+  /// Please refer to https://docs.auth3.dev/apis/identity-platform/administrative#deleteoauth2clients
   Future<grpc_api.DeleteOAuth2ClientResponse> deleteOAuth2Client(
       {String clientId}) async {
     var client = grpc_api.AdminClient(GrpcClientSingleton(url: url).client);
@@ -332,6 +337,7 @@ class AdminClient {
     return await client.deleteOAuth2Client(data, options: options);
   }
 
+  /// Please refer to https://docs.auth3.dev/apis/identity-platform/administrative#getidentities
   Future<grpc_api.GetIdentitiesResponse> getIdentities() async {
     var client = grpc_api.AdminClient(GrpcClientSingleton(url: url).client);
     var data = grpc_api.GetIdentitiesRequest();
@@ -339,6 +345,7 @@ class AdminClient {
     return await client.getIdentities(data, options: options);
   }
 
+  /// Please refer to https://docs.auth3.dev/apis/identity-platform/administrative#getidentitiesbyattribute
   Future<grpc_api.GetIdentitiesByAttributeResponse> getIdentitiesByAttribute(
       {String attribute, String value}) async {
     var client = grpc_api.AdminClient(GrpcClientSingleton(url: url).client);
@@ -350,6 +357,7 @@ class AdminClient {
     return await client.getIdentitiesByAttribute(data, options: options);
   }
 
+  /// Please refer to https://docs.auth3.dev/apis/identity-platform/administrative#updateidentity
   Future<grpc_api.UpdateIdentityResponse> updateIdentity(
       {String identityId, grpc_api.UpdateIdentityRequest_Lock lock}) async {
     var client = grpc_api.AdminClient(GrpcClientSingleton(url: url).client);
@@ -361,6 +369,7 @@ class AdminClient {
     return await client.updateIdentity(data, options: options);
   }
 
+  /// Please refer to https://docs.auth3.dev/apis/identity-platform/administrative#deleteidentity
   Future<grpc_api.DeleteIdentityResponse> deleteIdentity({String id}) async {
     var client = grpc_api.AdminClient(GrpcClientSingleton(url: url).client);
     var data = grpc_api.DeleteIdentityRequest();
@@ -370,6 +379,7 @@ class AdminClient {
     return await client.deleteIdentity(data, options: options);
   }
 
+  /// Please refer to https://docs.auth3.dev/apis/identity-platform/administrative#gettraits
   Future<grpc_api.GetTraitsResponse> getTraits({String identityId}) async {
     var client = grpc_api.AdminClient(GrpcClientSingleton(url: url).client);
     var data = grpc_api.GetTraitsRequest();
@@ -379,6 +389,7 @@ class AdminClient {
     return await client.getTraits(data, options: options);
   }
 
+  /// Please refer to https://docs.auth3.dev/apis/identity-platform/administrative#updatetraits
   Future<grpc_api.UpdateTraitsResponse> updateTraits(
       {String identityId, String traits}) async {
     var client = grpc_api.AdminClient(GrpcClientSingleton(url: url).client);
@@ -390,6 +401,7 @@ class AdminClient {
     return await client.updateTraits(data, options: options);
   }
 
+  /// Please refer to https://docs.auth3.dev/apis/identity-platform/administrative#getcredentials
   Future<grpc_api.GetCredentialsResponse> getCredentials(
       {String identityId}) async {
     var client = grpc_api.AdminClient(GrpcClientSingleton(url: url).client);
@@ -400,6 +412,7 @@ class AdminClient {
     return await client.getCredentials(data, options: options);
   }
 
+  /// Please refer to https://docs.auth3.dev/apis/identity-platform/administrative#getaddresses
   Future<grpc_api.GetAddressesResponse> getAddresses(
       {String identityId}) async {
     var client = grpc_api.AdminClient(GrpcClientSingleton(url: url).client);
@@ -410,6 +423,7 @@ class AdminClient {
     return await client.getAddresses(data, options: options);
   }
 
+  /// Please refer to https://docs.auth3.dev/apis/identity-platform/administrative#getidentity
   Future<grpc_api.GetIdentityResponse> getIdentity({String identityId}) async {
     var client = grpc_api.AdminClient(GrpcClientSingleton(url: url).client);
 
@@ -419,6 +433,7 @@ class AdminClient {
     return await client.getIdentity(data, options: options);
   }
 
+  /// Please refer to https://docs.auth3.dev/apis/identity-platform/administrative#getidentityloginattempts
   Future<grpc_api.GetIdentityLoginAttemptsResponse> getIdentityLoginAttempts(
       {String identityId}) async {
     var client = grpc_api.AdminClient(GrpcClientSingleton(url: url).client);
@@ -429,6 +444,7 @@ class AdminClient {
     return await client.getIdentityLoginAttempts(data, options: options);
   }
 
+  /// Please refer to https://docs.auth3.dev/apis/identity-platform/administrative#getidschema
   Future<grpc_api.GetIdSchemaResponse> getIdSchema({String id}) async {
     var client = grpc_api.AdminClient(GrpcClientSingleton(url: url).client);
 
@@ -438,6 +454,7 @@ class AdminClient {
     return await client.getIdSchema(data, options: options);
   }
 
+  /// Please refer to https://docs.auth3.dev/apis/identity-platform/administrative#getidschemas
   Future<grpc_api.GetIdSchemasResponse> getIdSchemas() async {
     var client = grpc_api.AdminClient(GrpcClientSingleton(url: url).client);
 
@@ -446,6 +463,7 @@ class AdminClient {
     return await client.getIdSchemas(data, options: options);
   }
 
+  /// Please refer to https://docs.auth3.dev/apis/identity-platform/administrative#createidschema
   Future<grpc_api.CreateIdSchemaResponse> createIdSchema(
       {String name, Map<String, dynamic> content}) async {
     var client = grpc_api.AdminClient(GrpcClientSingleton(url: url).client);
@@ -458,6 +476,7 @@ class AdminClient {
     return await client.createIdSchema(data, options: options);
   }
 
+  /// Please refer to https://docs.auth3.dev/apis/identity-platform/administrative#updateidschema
   Future<grpc_api.UpdateIdSchemaResponse> updateIdSchema(
       {String id, String name, Map<String, dynamic> content}) async {
     var client = grpc_api.AdminClient(GrpcClientSingleton(url: url).client);
@@ -471,6 +490,7 @@ class AdminClient {
     return await client.updateIdSchema(data, options: options);
   }
 
+  /// Please refer to https://docs.auth3.dev/apis/identity-platform/administrative#markdefaultidschema
   Future<grpc_api.MarkDefaultIdSchemaResponse> markDefaultIdSchema(
       {String id}) async {
     var client = grpc_api.AdminClient(GrpcClientSingleton(url: url).client);
@@ -481,6 +501,7 @@ class AdminClient {
     return await client.markDefaultIdSchema(data, options: options);
   }
 
+  /// Please refer to https://docs.auth3.dev/apis/identity-platform/administrative#getdefaultidschema
   Future<grpc_api.GetDefaultIdSchemaResponse> getDefaultIdSchema() async {
     var client = grpc_api.AdminClient(GrpcClientSingleton(url: url).client);
 
@@ -489,6 +510,7 @@ class AdminClient {
     return await client.getDefaultIdSchema(data, options: options);
   }
 
+  /// Please refer to https://docs.auth3.dev/apis/identity-platform/administrative#getemailssetup
   Future<grpc_api.GetEmailsSetupResponse> getEmailsSetup() async {
     var client = grpc_api.AdminClient(GrpcClientSingleton(url: url).client);
 
@@ -497,6 +519,7 @@ class AdminClient {
     return await client.getEmailsSetup(data, options: options);
   }
 
+  /// Please refer to https://docs.auth3.dev/apis/identity-platform/administrative#updateemailssetup
   Future<grpc_api.UpdateEmailsSetupResponse> updateEmailsSetup({
     String welcomeTitle,
     String welcomeTemplate,
@@ -548,6 +571,7 @@ class AdminClient {
     return await client.updateEmailsSetup(data, options: options);
   }
 
+  /// Please refer to https://docs.auth3.dev/apis/identity-platform/administrative#getuserbasestatistics
   Future<grpc_api.GetUserBaseStatisticsResponse> getUserBaseStatistics({
     int daysBefore,
   }) async {
@@ -559,6 +583,7 @@ class AdminClient {
     return await client.getUserBaseStatistics(data, options: options);
   }
 
+  /// Please refer to https://docs.auth3.dev/apis/identity-platform/administrative#deleteidschema
   Future<grpc_api.DeleteIdSchemaResponse> deleteIdSchema({String id}) async {
     var client = grpc_api.AdminClient(GrpcClientSingleton(url: url).client);
 
@@ -568,6 +593,7 @@ class AdminClient {
     return await client.deleteIdSchema(data, options: options);
   }
 
+  /// Please refer to https://docs.auth3.dev/apis/identity-platform/administrative#updatecredential
   Future<grpc_api.UpdateCredentialResponse> updateCredential(
       {String identityId,
       String connectionName,
@@ -582,6 +608,7 @@ class AdminClient {
     return await client.updateCredential(request, options: options);
   }
 
+  /// Please refer to https://docs.auth3.dev/apis/identity-platform/administrative#getaddress
   Future<grpc_api.GetAddressResponse> getAddress(
       {String id, String verification}) async {
     if (id != null && verification != null) {
@@ -602,6 +629,7 @@ class AdminClient {
     return await client.getAddress(data, options: options);
   }
 
+  /// Please refer to https://docs.auth3.dev/apis/identity-platform/administrative#updateaddress
   Future<grpc_api.UpdateAddressResponse> updateAddress(
       {String id, bool verified, String address}) async {
     var client = grpc_api.AdminClient(GrpcClientSingleton(url: url).client);
