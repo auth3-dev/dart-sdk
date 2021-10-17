@@ -1,5 +1,5 @@
 name: auth3_admin_sdk
-version: 1.0.0
+version: 1.0.1
 homepage: https://auth3.dev
 repository: https://github.com/auth3-dev/dart-sdk
 description: Official Auth3 Identity Platform Admin SDK, read more at https://auth3.dev/.
