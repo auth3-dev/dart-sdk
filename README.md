@@ -11,7 +11,7 @@ Check-out the API documentation at [https://docs.auth3.dev/apis/identity-platfor
 Our libraries can be run on all environments including:
 
 * `server`
-* `web` (e.g. Single-Page Aplications like AngularDart)
+* `web` (e.g. Single-Page Applications, like AngularDart)
 * and `flutter` (including `flutter for web`).
 
 ## Installation
