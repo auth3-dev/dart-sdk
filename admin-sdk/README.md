@@ -19,14 +19,14 @@ Our libraries can be run on all environments including:
 Add to your `pubspec.yaml`: 
 
 ```yaml
-auth3_admin_sdk: 1.0.0
+auth3_admin_sdk: ^1.0.2
 ```
 
 Then run:
 
 ```
 pub get
-````
+```
 
 ### Additional help
 
@@ -59,4 +59,4 @@ Customers of the Auth3 Identity Platform can access support through the official
 
 ## License
 
-Read the [LICENSE](https://github.com/auth3-dev/dart-sdk/blob/main/LICENSE).
+Read the [LICENSE](https://github.com/auth3-dev/dart-sdk/blob/main/admin-sdk/LICENSE).

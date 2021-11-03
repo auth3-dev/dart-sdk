@@ -14,6 +14,8 @@ Our libraries can be run on all environments including:
 * `web` (e.g. Single-Page Applications, like AngularDart)
 * and `flutter` (including `flutter for web`).
 
+Please, refer to each specific library for a more accurate list of the supported platforms it can be run on.
+
 ## Installation
 
 Please check sub-folders' README.md for additional installation instructions, selecting the library you wish to use.
