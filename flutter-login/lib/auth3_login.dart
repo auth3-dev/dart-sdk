@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:auth3_login/jwt_parser.dart';
 import 'package:flutter_web_auth/flutter_web_auth.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 /// The Auth3Login class provides a simple and secure mean to provide login functionalities
 /// to any Flutter application.
@@ -10,12 +11,13 @@ class Auth3Login {
   final Random _rnd = Random();
   final String _loginUrlDomain = '.as.auth3.dev';
   final String _loginUrlPath = '/oauth2/auth';
+  final storage = new FlutterSecureStorage();
 
   // external library configuration
 
   /// The Auth3 project ID. You can find this in the Console (https://console.auth3.dev)
-  /// under "Settings" > "Endpoints".
-  final String projectId;
+  /// under "Settings" > "Endpoints". If omitted, internally we'll try to detect it automatically.
+  final String? projectId;
 
   /// Provide a client capable of performing the Implicit flow.
   /// If you need further help please refer to the official documentation
@@ -37,10 +39,28 @@ class Auth3Login {
   String _rawValues = '';
 
   /// Initialize a new instance of the Auth3Login widget.
+  /// [projectId] is optional, and if omitted it's obtained from
   Auth3Login(
-      {required this.projectId,
+      {this.projectId,
       required this.clientId,
       this.callbackUri = 'auth3://callback'});
+
+  // Returns the current project_id, by either explicit user choice
+  // or by trying to extract it from the client identifier.
+  String _getProjectId() {
+    if (this.projectId != null) {
+      return this.projectId!;
+    }
+
+    var emailParts = this.clientId.split('@');
+    if (emailParts.length < 2) {
+      // cannot extract, return empty
+      return '';
+    }
+
+    var domain = emailParts[1];
+    return domain.split('.')[0];
+  }
 
   /// Generates random strings to satisfy the requirements of the Auth3 Identity Platform
   /// to use the Auth3 Implicit Flow.
@@ -76,9 +96,46 @@ class Auth3Login {
       queryParameters['nonce'] = nonce;
     }
 
-    return Uri.decodeFull(
-        Uri.https(projectId + _loginUrlDomain, _loginUrlPath, queryParameters)
-            .toString());
+    return Uri.decodeFull(Uri.https(
+            (_getProjectId() + _loginUrlDomain), _loginUrlPath, queryParameters)
+        .toString());
+  }
+
+  // Persist data to recover it after an app halt.
+  Future<void> _persist() async {
+    await storage.write(key: '_token', value: _token);
+    await storage.write(key: '_idToken', value: _idToken);
+    await storage.write(key: '_rawValues', value: _rawValues);
+  }
+
+  // Rehydrate state when resuming from a closed app.
+  Future<void> _rehydrate() async {
+    Map<String, String> store = await storage.readAll();
+
+    _token = store['_token'] ?? '';
+    _idToken = store['_idToken'] ?? '';
+    _rawValues = store['_rawValues'] ?? '';
+  }
+
+  // Clean-up persistent storage.
+  Future<void> _destroy() async {
+    await storage.deleteAll();
+  }
+
+  /// Try to restore the session from a previous existing session rather than display
+  /// the Login modal again. This is never performed automatically by the library but
+  /// should be done by all applications when the user resumes an app to avoid unneeded
+  /// round-trips to the Authorization Server.
+  Future<bool> restore() async {
+    // try to recover from an active session
+    await _rehydrate();
+
+    if (isAuthenticated) {
+      // short-circuit if there's an existing session
+      return Future.value(true);
+    }
+
+    return Future.value(false);
   }
 
   /// Prompt the user to log-in. By default the response type is set to return an access token
@@ -133,6 +190,7 @@ class Auth3Login {
       }
 
       _rawValues = result;
+      await _persist();
 
       return Future.value(null);
     }
@@ -150,7 +208,7 @@ class Auth3Login {
       // OpenID Connect Front-Channel Logout
       var url = Uri.parse(
           // logout uri should be the callback here, so we detect and truncate the window
-          'https://${projectId}${_loginUrlDomain}/oauth2/sessions/logout?id_token_hint=${_idToken}&post_logout_redirect_uri=${callbackUri}');
+          'https://${_getProjectId()}${_loginUrlDomain}/oauth2/sessions/logout?id_token_hint=${_idToken}&post_logout_redirect_uri=${callbackUri}');
 
       // var response = await http.get(url);
       var result = await FlutterWebAuth.authenticate(
@@ -162,6 +220,7 @@ class Auth3Login {
     _token = '';
     _idToken = '';
     _rawValues = '';
+    await _destroy();
 
     return Future.value(null);
   }
@@ -170,6 +229,7 @@ class Auth3Login {
   /// Can be used to detect if the user is authenticated, but please note that the
   /// presence of a token does not imply it's valid (for example it might be revoked or expired).
   bool get isAuthenticated {
+    // TODO: verify if token is active.
     return _token.isNotEmpty;
   }
 

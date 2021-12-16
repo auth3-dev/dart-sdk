@@ -1,2 +1,2 @@
-const AUTH3_PROJECT_ID = '<AUTH3_PROJECT_ID>';
-const AUTH3_CLIENT_ID = '<AUTH3_CLIENT_ID>';
+// That's all you need to config auth3_login
+const AUTH3_CLIENT_ID = 'AUTH3_CLIENT_ID';

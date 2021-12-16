@@ -31,8 +31,20 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   Map<String, dynamic> _profile = {};
-  Auth3Login auth3 =
-      Auth3Login(projectId: AUTH3_PROJECT_ID, clientId: AUTH3_CLIENT_ID);
+  Auth3Login auth3 = Auth3Login(clientId: AUTH3_CLIENT_ID);
+
+  void initState() {
+    super.initState();
+    // Verify if we can restore any existing session.
+    auth3.restore().then((restored) {
+      if (restored) {
+        // TODO: Please, note that the token could be expired or have been revoked in the meantime.
+        setState(() {
+          _profile = auth3.getProfile();
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
