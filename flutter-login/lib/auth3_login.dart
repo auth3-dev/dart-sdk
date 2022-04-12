@@ -163,40 +163,54 @@ class Auth3Login {
     // var values = parsedResult.queryParameters;
     var values = {};
 
-    // response_mode for implicit flow is fragment, so let's parse it and merge with queryparams
-    var pairs = parsedResult.fragment.split('&');
+    var pairs = [];
+
+    // Normal, successful responses will be handled through fragment as it's the default
+    // for the implicit flow.
+    if (parsedResult.fragment.length > 0) {
+      // response_mode for implicit flow is fragment, so let's parse it and merge with queryparams
+      pairs = parsedResult.fragment.split('&');
+    }
+
+    // Errors and non-implicit flows can be returned through querystring, also the client
+    // can be configured with response_mode.
+    if (parsedResult.query.length > 0) {
+      pairs = parsedResult.query.split('&');
+    }
+
     pairs.forEach((element) {
       var parts = element.split('=');
-      values[parts[0]] = parts[1];
+
+      if (parts.length == 2) {
+        values[parts[0]] = parts[1];
+      }
     });
 
     // check for errors
     if (values.containsKey('error')) {
+      // TODO(auth3): display within the app
       return Future.error('LoginError: ${values['error_description']}');
-    } else {
-      if (values['state'] != state) {
-        // handle your error better here and display the user a valid error message
-        // or automatically restart the login flow.
-        return Future.error(
-            'LoginError: state was not validated, the requeste could not be trusted');
-      }
-
-      if (values['access_token'] != null) {
-        _token = values['access_token'] ?? '';
-      }
-
-      if (values['id_token'] != null) {
-        _idToken = values['id_token'] ?? '';
-      }
-
-      _rawValues = result;
-      await _persist();
-
-      return Future.value(null);
+    }
+    
+    if (values['state'] != state) {
+      // handle your error better here and display the user a valid error message
+      // or automatically restart the login flow.
+      return Future.error(
+          'LoginError: state was not validated, the request could not be trusted');
     }
 
-    return Future.error(
-        'LoginError: unable to complete the login with success, response was: $result');
+    if (values['access_token'] != null) {
+      _token = values['access_token'] ?? '';
+    }
+
+    if (values['id_token'] != null) {
+      _idToken = values['id_token'] ?? '';
+    }
+
+    _rawValues = result;
+    await _persist();
+
+    return Future.value(null);
   }
 
   /// Log out the user, whenever possible, using Single Logout.
@@ -208,10 +222,9 @@ class Auth3Login {
       // OpenID Connect Front-Channel Logout
       var url = Uri.parse(
           // logout uri should be the callback here, so we detect and truncate the window
-          'https://${_getProjectId()}${_loginUrlDomain}/oauth2/sessions/logout?id_token_hint=${_idToken}&post_logout_redirect_uri=${callbackUri}');
-
-      // var response = await http.get(url);
-      var result = await FlutterWebAuth.authenticate(
+          'https://${_getProjectId()}$_loginUrlDomain/oauth2/sessions/logout?id_token_hint=$_idToken&post_logout_redirect_uri=$callbackUri');
+          
+      await FlutterWebAuth.authenticate(
         url: url.toString(),
         callbackUrlScheme: Uri.parse(callbackUri).scheme,
       );

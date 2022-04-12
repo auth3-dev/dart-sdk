@@ -1,3 +1,7 @@
+## 1.1.2
+
+- Improve callback error handling
+
 ## 1.1.1
 
 - Update dependencies  
