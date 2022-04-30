@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:auth3_login/jwt_parser.dart';
 import 'package:flutter_web_auth/flutter_web_auth.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'dart:html' show window;
+import "package:universal_html/html.dart" show window;
 
 /// The Auth3Login class provides a simple and secure mean to provide login functionalities
 /// to any Flutter application.
@@ -220,7 +220,7 @@ class Auth3Login {
             ' '); // urlencoding seems to not be supported by Uri.decodeFull (it supports % encoding)
       }
 
-      return Future.error('LoginError: ${message}');
+      return Future.error('LoginError: $message');
     }
 
     if (values['state'] != state) {
@@ -312,7 +312,7 @@ class Auth3Login {
           callbackUri.contains('https://') == false &&
           callbackUri.contains('http://') == false) {
         var errorMessage =
-            "AUTH3.DEV: The current callback URI (${callbackUri}) uses a custom protocol, but you're running on web. " +
+            "AUTH3.DEV: The current callback URI ($callbackUri) uses a custom protocol, but you're running on web. " +
                 "This won't work, you should be setting 'webcallbackUri' or use Universal Links.";
         print(errorMessage);
 

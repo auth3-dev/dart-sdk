@@ -1,5 +1,5 @@
 name: auth3_login
-version: 1.2.0
+version: 1.2.2
 homepage: https://auth3.dev
 repository: https://github.com/auth3-dev/dart-sdk
 description: Official Auth3 Login SDK for Flutter, read more at https://auth3.dev/.
@@ -14,6 +14,7 @@ dependencies:
     sdk: flutter
   flutter_web_auth: ^0.4.1
   flutter_secure_storage: ^5.0.2
+  universal_html: ^2.0.8
 
 dev_dependencies:
   flutter_test:

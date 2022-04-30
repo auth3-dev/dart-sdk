@@ -1,3 +1,11 @@
+## 1.2.2
+
+ - Non functional changes
+
+## 1.2.1
+
+ - Restore multi-platform support
+
 ## 1.2.0 
 
  - Add support for specifying a web-only redirect location, adding support for `flutter_for_web`
