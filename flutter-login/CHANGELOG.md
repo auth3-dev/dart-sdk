@@ -1,6 +1,12 @@
+## 1.2.0 
+
+ - Add support for specifying a web-only redirect location, adding support for `flutter_for_web`
+ - Make errors received from Auth3 more user friendly
+
 ## 1.1.2
 
 - Improve callback error handling
+- Improve code quality, non functional changes
 
 ## 1.1.1
 

@@ -1,7 +1,9 @@
 import 'dart:math';
+import 'package:flutter/foundation.dart';
 import 'package:auth3_login/jwt_parser.dart';
 import 'package:flutter_web_auth/flutter_web_auth.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'dart:html' show window;
 
 /// The Auth3Login class provides a simple and secure mean to provide login functionalities
 /// to any Flutter application.
@@ -24,10 +26,26 @@ class Auth3Login {
   /// available here: https://docs.auth3.dev/products/identity-platform/authenticate-users-in-a-mobile-application
   final String clientId;
 
-  /// The callback at which Auth3 should return the token to. For most apps you can leave the
+  /// The callback at which Auth3 should return the token to (mobile platform). For most apps you can leave the
   /// default which is `auth3://callback`, this must be registered as a Client's authorized
   /// Post Login Redirect URI on the Auth3 Console.
   final String callbackUri;
+
+  /// The callback at which Auth3 should return the token to (web platform). This is a way to avoid linking
+  /// Universal Links. We'll just provide a web callback uri here that will be used on the web, so mobile apps
+  /// can keep using Deep Links with custom protocols separately without the need to use Universal Links.
+  // You might want to set this to the current browser location, for example
+  /// `"${window.location.protocol}//${window.location.host}/callback.html"` note that this will require
+  /// you create a `callback.html` with the following content (also register all valid Redirect URIs on the Console,
+  /// editing your Client Security settings):
+  ///
+  /// <script>
+  ///   window.opener.postMessage({
+  ///     'flutter-web-auth': window.location.href
+  ///   }, window.location.origin);
+  ///   window.close();
+  /// </script>
+  String webCallbackUri;
 
   /// Holds the obtained Access Token.
   String _token = '';
@@ -43,7 +61,8 @@ class Auth3Login {
   Auth3Login(
       {this.projectId,
       required this.clientId,
-      this.callbackUri = 'auth3://callback'});
+      this.callbackUri = 'auth3://callback',
+      this.webCallbackUri = ''});
 
   // Returns the current project_id, by either explicit user choice
   // or by trying to extract it from the client identifier.
@@ -67,7 +86,7 @@ class Auth3Login {
   String _generateRandom(int length) => String.fromCharCodes(Iterable.generate(
       length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
 
-  String _buildAuthorizeEndpoint({
+  String? _buildAuthorizeEndpoint({
     String? responseType,
     List<String>? scope,
     String? state,
@@ -86,7 +105,7 @@ class Auth3Login {
     }
 
     queryParameters['client_id'] = clientId;
-    queryParameters['redirect_uri'] = callbackUri;
+    queryParameters['redirect_uri'] = platformSpecificUri;
 
     if (state != null) {
       queryParameters['state'] = state;
@@ -148,19 +167,25 @@ class Auth3Login {
     var state = _generateRandom(12);
     var nonce = _generateRandom(12);
 
+    var authorizeUrl = _buildAuthorizeEndpoint(
+        responseType: responseType,
+        scope: scope,
+        state: state,
+        nonce: nonce,
+        additionalParams: additionalParams);
+
+    // terminate if we got no url, for example, using a custom protocol on web platform.
+    if (authorizeUrl == null) {
+      return;
+    }
+
     // Present the dialog to the user.
     var result = await FlutterWebAuth.authenticate(
-      url: _buildAuthorizeEndpoint(
-          responseType: responseType,
-          scope: scope,
-          state: state,
-          nonce: nonce,
-          additionalParams: additionalParams),
-      callbackUrlScheme: Uri.parse(callbackUri).scheme,
+      url: authorizeUrl,
+      callbackUrlScheme: Uri.parse(platformSpecificUri).scheme,
     );
 
     var parsedResult = Uri.parse(result);
-    // var values = parsedResult.queryParameters;
     var values = {};
 
     var pairs = [];
@@ -188,10 +213,16 @@ class Auth3Login {
 
     // check for errors
     if (values.containsKey('error')) {
-      // TODO(auth3): display within the app
-      return Future.error('LoginError: ${values['error_description']}');
+      // Make error more user friendly
+      var message = values['error_description'];
+      if (message is String) {
+        message = message.replaceAll('+',
+            ' '); // urlencoding seems to not be supported by Uri.decodeFull (it supports % encoding)
+      }
+
+      return Future.error('LoginError: ${message}');
     }
-    
+
     if (values['state'] != state) {
       // handle your error better here and display the user a valid error message
       // or automatically restart the login flow.
@@ -222,11 +253,11 @@ class Auth3Login {
       // OpenID Connect Front-Channel Logout
       var url = Uri.parse(
           // logout uri should be the callback here, so we detect and truncate the window
-          'https://${_getProjectId()}$_loginUrlDomain/oauth2/sessions/logout?id_token_hint=$_idToken&post_logout_redirect_uri=$callbackUri');
-          
+          'https://${_getProjectId()}$_loginUrlDomain/oauth2/sessions/logout?id_token_hint=$_idToken&post_logout_redirect_uri=$platformSpecificUri');
+
       await FlutterWebAuth.authenticate(
         url: url.toString(),
-        callbackUrlScheme: Uri.parse(callbackUri).scheme,
+        callbackUrlScheme: Uri.parse(platformSpecificUri).scheme,
       );
     }
 
@@ -268,5 +299,29 @@ class Auth3Login {
     }
 
     return JwtParser.parse(_idToken);
+  }
+
+  String get platformSpecificUri {
+    if (kIsWeb == true && webCallbackUri.length > 0) {
+      return webCallbackUri;
+    } else {
+      // Prevent allowing custom protocols on web. Browsers cannot handle them.
+      // Developers should instead use an alternate "webCallbackUri" for web, or use universal links.
+      // Follow instructions available at https://docs.auth3.dev/products/identity-platform/authenticate-users-in-a-mobile-application-with-auth3-login-sdk
+      if (kIsWeb == true &&
+          callbackUri.contains('https://') == false &&
+          callbackUri.contains('http://') == false) {
+        var errorMessage =
+            "AUTH3.DEV: The current callback URI (${callbackUri}) uses a custom protocol, but you're running on web. " +
+                "This won't work, you should be setting 'webcallbackUri' or use Universal Links.";
+        print(errorMessage);
+
+        if (kDebugMode) {
+          window.alert(errorMessage);
+        }
+      }
+
+      return callbackUri;
+    }
   }
 }

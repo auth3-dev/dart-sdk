@@ -15,6 +15,7 @@ Our libraries can be run on the following environments:
 * iOS
 * Android
 * Mac OS
+* Web (flutter web)
 
 ## Installation
 
