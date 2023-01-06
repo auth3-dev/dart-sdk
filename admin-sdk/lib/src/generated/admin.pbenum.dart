@@ -209,6 +209,21 @@ class GetIdentityResponse_Lock extends $pb.ProtobufEnum {
   const GetIdentityResponse_Lock._($core.int v, $core.String n) : super(v, n);
 }
 
+class GetIdentityByIdentifierResponse_Identity_Lock extends $pb.ProtobufEnum {
+  static const GetIdentityByIdentifierResponse_Identity_Lock UNLOCKED = GetIdentityByIdentifierResponse_Identity_Lock._(0, 'UNLOCKED');
+  static const GetIdentityByIdentifierResponse_Identity_Lock ADMIN_LOCKED = GetIdentityByIdentifierResponse_Identity_Lock._(1, 'ADMIN_LOCKED');
+
+  static const $core.List<GetIdentityByIdentifierResponse_Identity_Lock> values = <GetIdentityByIdentifierResponse_Identity_Lock> [
+    UNLOCKED,
+    ADMIN_LOCKED,
+  ];
+
+  static final $core.Map<$core.int, GetIdentityByIdentifierResponse_Identity_Lock> _byValue = $pb.ProtobufEnum.initByValue(values);
+  static GetIdentityByIdentifierResponse_Identity_Lock valueOf($core.int value) => _byValue[value];
+
+  const GetIdentityByIdentifierResponse_Identity_Lock._($core.int v, $core.String n) : super(v, n);
+}
+
 class GetIdentitiesByAttributeResponse_Identity_Lock extends $pb.ProtobufEnum {
   static const GetIdentitiesByAttributeResponse_Identity_Lock UNLOCKED = GetIdentitiesByAttributeResponse_Identity_Lock._(0, 'UNLOCKED');
   static const GetIdentitiesByAttributeResponse_Identity_Lock ADMIN_LOCKED = GetIdentitiesByAttributeResponse_Identity_Lock._(1, 'ADMIN_LOCKED');

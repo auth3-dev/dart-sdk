@@ -26,6 +26,13 @@ class AdminClient extends $grpc.Client {
           ($0.GetIdentityRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $0.GetIdentityResponse.fromBuffer(value));
+  static final _$getIdentityByIdentifier = $grpc.ClientMethod<
+          $0.GetIdentityByIdentifierRequest,
+          $0.GetIdentityByIdentifierResponse>(
+      '/depot.devtools.auth.v0.identity.admin.Admin/GetIdentityByIdentifier',
+      ($0.GetIdentityByIdentifierRequest value) => value.writeToBuffer(),
+      ($core.List<$core.int> value) =>
+          $0.GetIdentityByIdentifierResponse.fromBuffer(value));
   static final _$getIdentitiesByAttribute = $grpc.ClientMethod<
           $0.GetIdentitiesByAttributeRequest,
           $0.GetIdentitiesByAttributeResponse>(
@@ -226,6 +233,15 @@ class AdminClient extends $grpc.Client {
       {$grpc.CallOptions options}) {
     final call = $createCall(
         _$getIdentity, $async.Stream.fromIterable([request]),
+        options: options);
+    return $grpc.ResponseFuture(call);
+  }
+
+  $grpc.ResponseFuture<$0.GetIdentityByIdentifierResponse>
+      getIdentityByIdentifier($0.GetIdentityByIdentifierRequest request,
+          {$grpc.CallOptions options}) {
+    final call = $createCall(
+        _$getIdentityByIdentifier, $async.Stream.fromIterable([request]),
         options: options);
     return $grpc.ResponseFuture(call);
   }
@@ -522,6 +538,15 @@ abstract class AdminServiceBase extends $grpc.Service {
             ($core.List<$core.int> value) =>
                 $0.GetIdentityRequest.fromBuffer(value),
             ($0.GetIdentityResponse value) => value.writeToBuffer()));
+    $addMethod($grpc.ServiceMethod<$0.GetIdentityByIdentifierRequest,
+            $0.GetIdentityByIdentifierResponse>(
+        'GetIdentityByIdentifier',
+        getIdentityByIdentifier_Pre,
+        false,
+        false,
+        ($core.List<$core.int> value) =>
+            $0.GetIdentityByIdentifierRequest.fromBuffer(value),
+        ($0.GetIdentityByIdentifierResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.GetIdentitiesByAttributeRequest,
             $0.GetIdentitiesByAttributeResponse>(
         'GetIdentitiesByAttribute',
@@ -801,6 +826,12 @@ abstract class AdminServiceBase extends $grpc.Service {
     return getIdentity(call, await request);
   }
 
+  $async.Future<$0.GetIdentityByIdentifierResponse> getIdentityByIdentifier_Pre(
+      $grpc.ServiceCall call,
+      $async.Future<$0.GetIdentityByIdentifierRequest> request) async {
+    return getIdentityByIdentifier(call, await request);
+  }
+
   $async.Future<$0.GetIdentitiesByAttributeResponse>
       getIdentitiesByAttribute_Pre($grpc.ServiceCall call,
           $async.Future<$0.GetIdentitiesByAttributeRequest> request) async {
@@ -982,6 +1013,8 @@ abstract class AdminServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $0.CreateIdentityRequest request);
   $async.Future<$0.GetIdentityResponse> getIdentity(
       $grpc.ServiceCall call, $0.GetIdentityRequest request);
+  $async.Future<$0.GetIdentityByIdentifierResponse> getIdentityByIdentifier(
+      $grpc.ServiceCall call, $0.GetIdentityByIdentifierRequest request);
   $async.Future<$0.GetIdentitiesByAttributeResponse> getIdentitiesByAttribute(
       $grpc.ServiceCall call, $0.GetIdentitiesByAttributeRequest request);
   $async.Future<$0.GetIdentitiesResponse> getIdentities(

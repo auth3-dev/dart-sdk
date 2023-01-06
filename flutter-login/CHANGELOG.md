@@ -1,3 +1,12 @@
+## 1.3.0
+
+ - Update dependencies
+ - Bump Dart SDK to ">=2.17.0-0 <3.0.0"
+
+## 1.2.3
+
+ - Display auth errors using native dialogs to help debugging
+
 ## 1.2.2
 
  - Non functional changes

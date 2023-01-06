@@ -4,6 +4,7 @@ import 'package:auth3_login/jwt_parser.dart';
 import 'package:flutter_web_auth/flutter_web_auth.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import "package:universal_html/html.dart" show window;
+import "package:native_dialog/native_dialog.dart";
 
 /// The Auth3Login class provides a simple and secure mean to provide login functionalities
 /// to any Flutter application.
@@ -86,13 +87,13 @@ class Auth3Login {
   String _generateRandom(int length) => String.fromCharCodes(Iterable.generate(
       length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
 
-  String? _buildAuthorizeEndpoint({
+  Future<String?> _buildAuthorizeEndpoint({
     String? responseType,
     List<String>? scope,
     String? state,
     String? nonce,
     Map<String, String>? additionalParams,
-  }) {
+  }) async {
     Map<String, String> queryParameters = additionalParams ?? {};
 
     if (responseType != null) {
@@ -105,7 +106,7 @@ class Auth3Login {
     }
 
     queryParameters['client_id'] = clientId;
-    queryParameters['redirect_uri'] = platformSpecificUri;
+    queryParameters['redirect_uri'] = await getPlatformSpecificURI();
 
     if (state != null) {
       queryParameters['state'] = state;
@@ -115,9 +116,9 @@ class Auth3Login {
       queryParameters['nonce'] = nonce;
     }
 
-    return Uri.decodeFull(Uri.https(
+    return Future.value(Uri.decodeFull(Uri.https(
             (_getProjectId() + _loginUrlDomain), _loginUrlPath, queryParameters)
-        .toString());
+        .toString()));
   }
 
   // Persist data to recover it after an app halt.
@@ -167,7 +168,7 @@ class Auth3Login {
     var state = _generateRandom(12);
     var nonce = _generateRandom(12);
 
-    var authorizeUrl = _buildAuthorizeEndpoint(
+    var authorizeUrl = await _buildAuthorizeEndpoint(
         responseType: responseType,
         scope: scope,
         state: state,
@@ -182,7 +183,8 @@ class Auth3Login {
     // Present the dialog to the user.
     var result = await FlutterWebAuth.authenticate(
       url: authorizeUrl,
-      callbackUrlScheme: Uri.parse(platformSpecificUri).scheme,
+      callbackUrlScheme: Uri.parse(await getPlatformSpecificURI()).scheme,
+      preferEphemeral: true,
     );
 
     var parsedResult = Uri.parse(result);
@@ -220,14 +222,14 @@ class Auth3Login {
             ' '); // urlencoding seems to not be supported by Uri.decodeFull (it supports % encoding)
       }
 
-      return Future.error('LoginError: $message');
+      return Future.error('Login error: ${Uri.decodeFull(message)}');
     }
 
     if (values['state'] != state) {
       // handle your error better here and display the user a valid error message
       // or automatically restart the login flow.
       return Future.error(
-          'LoginError: state was not validated, the request could not be trusted');
+          'Login error: state was not validated, the request could not be trusted. Please retry later.');
     }
 
     if (values['access_token'] != null) {
@@ -250,14 +252,15 @@ class Auth3Login {
   Future<void> logout() async {
     // If we have an Id Token we can proceed with a Single-Sign out.
     if (_idToken.isNotEmpty) {
+      var platformSpecificURI = await getPlatformSpecificURI();
       // OpenID Connect Front-Channel Logout
       var url = Uri.parse(
           // logout uri should be the callback here, so we detect and truncate the window
-          'https://${_getProjectId()}$_loginUrlDomain/oauth2/sessions/logout?id_token_hint=$_idToken&post_logout_redirect_uri=$platformSpecificUri');
+          'https://${_getProjectId()}$_loginUrlDomain/oauth2/sessions/logout?id_token_hint=$_idToken&post_logout_redirect_uri=$platformSpecificURI');
 
       await FlutterWebAuth.authenticate(
         url: url.toString(),
-        callbackUrlScheme: Uri.parse(platformSpecificUri).scheme,
+        callbackUrlScheme: Uri.parse(platformSpecificURI).scheme,
       );
     }
 
@@ -295,15 +298,15 @@ class Auth3Login {
   Map<String, dynamic> getProfile() {
     if (_idToken.isEmpty) {
       throw new Exception(
-          'LoginError: missing id token, did you forget to call `login()` or request the "id_token" responseType?');
+          'Login error: missing id token, did you forget to call `login()` or request the "id_token" responseType?');
     }
 
     return JwtParser.parse(_idToken);
   }
 
-  String get platformSpecificUri {
+  Future<String> getPlatformSpecificURI() async {
     if (kIsWeb == true && webCallbackUri.length > 0) {
-      return webCallbackUri;
+      return Future.value(webCallbackUri);
     } else {
       // Prevent allowing custom protocols on web. Browsers cannot handle them.
       // Developers should instead use an alternate "webCallbackUri" for web, or use universal links.
@@ -314,14 +317,19 @@ class Auth3Login {
         var errorMessage =
             "AUTH3.DEV: The current callback URI ($callbackUri) uses a custom protocol, but you're running on web. " +
                 "This won't work, you should be setting 'webcallbackUri' or use Universal Links.";
-        print(errorMessage);
 
         if (kDebugMode) {
           window.alert(errorMessage);
+        } else {
+          try {
+            await NativeDialog.alert(errorMessage);
+          } catch (e) {
+            print("Received $e trying to display natively: $errorMessage");
+          }
         }
       }
 
-      return callbackUri;
+      return Future.value(callbackUri);
     }
   }
 }

@@ -103,6 +103,8 @@ class CreateIdentityResponse extends $pb.GeneratedMessage {
 
 class GetIdentitiesRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetIdentitiesRequest', package: const $pb.PackageName('depot.devtools.auth.v0.identity.admin'), createEmptyInstance: create)
+    ..a<$core.int>(1, 'pageSize', $pb.PbFieldType.O3)
+    ..aOS(2, 'pageToken')
     ..hasRequiredFields = false
   ;
 
@@ -120,6 +122,24 @@ class GetIdentitiesRequest extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static GetIdentitiesRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetIdentitiesRequest>(create);
   static GetIdentitiesRequest _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get pageSize => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set pageSize($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasPageSize() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPageSize() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get pageToken => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set pageToken($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasPageToken() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearPageToken() => clearField(2);
 }
 
 class GetIdentitiesResponse_Identity extends $pb.GeneratedMessage {
@@ -210,6 +230,8 @@ class GetIdentitiesResponse_Identity extends $pb.GeneratedMessage {
 class GetIdentitiesResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetIdentitiesResponse', package: const $pb.PackageName('depot.devtools.auth.v0.identity.admin'), createEmptyInstance: create)
     ..pc<GetIdentitiesResponse_Identity>(1, 'identities', $pb.PbFieldType.PM, subBuilder: GetIdentitiesResponse_Identity.create)
+    ..aOS(2, 'nextPageToken')
+    ..a<$core.int>(3, 'totalSize', $pb.PbFieldType.O3)
     ..hasRequiredFields = false
   ;
 
@@ -230,6 +252,24 @@ class GetIdentitiesResponse extends $pb.GeneratedMessage {
 
   @$pb.TagNumber(1)
   $core.List<GetIdentitiesResponse_Identity> get identities => $_getList(0);
+
+  @$pb.TagNumber(2)
+  $core.String get nextPageToken => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set nextPageToken($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasNextPageToken() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearNextPageToken() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.int get totalSize => $_getIZ(2);
+  @$pb.TagNumber(3)
+  set totalSize($core.int v) { $_setSignedInt32(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasTotalSize() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearTotalSize() => clearField(3);
 }
 
 class GetIdentityRequest extends $pb.GeneratedMessage {
@@ -364,6 +404,193 @@ class GetIdentityResponse extends $pb.GeneratedMessage {
   $core.bool hasLock() => $_has(8);
   @$pb.TagNumber(9)
   void clearLock() => clearField(9);
+}
+
+class GetIdentityByIdentifierRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetIdentityByIdentifierRequest', package: const $pb.PackageName('depot.devtools.auth.v0.identity.admin'), createEmptyInstance: create)
+    ..aOS(1, 'attribute')
+    ..aOS(2, 'value')
+    ..aOS(3, 'connectionId')
+    ..hasRequiredFields = false
+  ;
+
+  GetIdentityByIdentifierRequest._() : super();
+  factory GetIdentityByIdentifierRequest() => create();
+  factory GetIdentityByIdentifierRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetIdentityByIdentifierRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  GetIdentityByIdentifierRequest clone() => GetIdentityByIdentifierRequest()..mergeFromMessage(this);
+  GetIdentityByIdentifierRequest copyWith(void Function(GetIdentityByIdentifierRequest) updates) => super.copyWith((message) => updates(message as GetIdentityByIdentifierRequest));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetIdentityByIdentifierRequest create() => GetIdentityByIdentifierRequest._();
+  GetIdentityByIdentifierRequest createEmptyInstance() => create();
+  static $pb.PbList<GetIdentityByIdentifierRequest> createRepeated() => $pb.PbList<GetIdentityByIdentifierRequest>();
+  @$core.pragma('dart2js:noInline')
+  static GetIdentityByIdentifierRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetIdentityByIdentifierRequest>(create);
+  static GetIdentityByIdentifierRequest _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get attribute => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set attribute($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasAttribute() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAttribute() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get value => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set value($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasValue() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearValue() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get connectionId => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set connectionId($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasConnectionId() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearConnectionId() => clearField(3);
+}
+
+class GetIdentityByIdentifierResponse_Identity extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetIdentityByIdentifierResponse.Identity', package: const $pb.PackageName('depot.devtools.auth.v0.identity.admin'), createEmptyInstance: create)
+    ..aOS(1, 'identityId')
+    ..aOM<$2.Timestamp>(2, 'createdAt', subBuilder: $2.Timestamp.create)
+    ..aOM<$2.Timestamp>(3, 'updatedAt', subBuilder: $2.Timestamp.create)
+    ..aOS(4, 'mainIdentifier')
+    ..aOS(5, 'traitsId')
+    ..pPS(6, 'addressesIds')
+    ..m<$core.String, $core.String>(7, 'credentialsIds', entryClassName: 'GetIdentityByIdentifierResponse.Identity.CredentialsIdsEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OS, packageName: const $pb.PackageName('depot.devtools.auth.v0.identity.admin'))
+    ..aOS(8, 'schemaId')
+    ..e<GetIdentityByIdentifierResponse_Identity_Lock>(9, 'lock', $pb.PbFieldType.OE, defaultOrMaker: GetIdentityByIdentifierResponse_Identity_Lock.UNLOCKED, valueOf: GetIdentityByIdentifierResponse_Identity_Lock.valueOf, enumValues: GetIdentityByIdentifierResponse_Identity_Lock.values)
+    ..hasRequiredFields = false
+  ;
+
+  GetIdentityByIdentifierResponse_Identity._() : super();
+  factory GetIdentityByIdentifierResponse_Identity() => create();
+  factory GetIdentityByIdentifierResponse_Identity.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetIdentityByIdentifierResponse_Identity.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  GetIdentityByIdentifierResponse_Identity clone() => GetIdentityByIdentifierResponse_Identity()..mergeFromMessage(this);
+  GetIdentityByIdentifierResponse_Identity copyWith(void Function(GetIdentityByIdentifierResponse_Identity) updates) => super.copyWith((message) => updates(message as GetIdentityByIdentifierResponse_Identity));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetIdentityByIdentifierResponse_Identity create() => GetIdentityByIdentifierResponse_Identity._();
+  GetIdentityByIdentifierResponse_Identity createEmptyInstance() => create();
+  static $pb.PbList<GetIdentityByIdentifierResponse_Identity> createRepeated() => $pb.PbList<GetIdentityByIdentifierResponse_Identity>();
+  @$core.pragma('dart2js:noInline')
+  static GetIdentityByIdentifierResponse_Identity getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetIdentityByIdentifierResponse_Identity>(create);
+  static GetIdentityByIdentifierResponse_Identity _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get identityId => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set identityId($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasIdentityId() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearIdentityId() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $2.Timestamp get createdAt => $_getN(1);
+  @$pb.TagNumber(2)
+  set createdAt($2.Timestamp v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasCreatedAt() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearCreatedAt() => clearField(2);
+  @$pb.TagNumber(2)
+  $2.Timestamp ensureCreatedAt() => $_ensure(1);
+
+  @$pb.TagNumber(3)
+  $2.Timestamp get updatedAt => $_getN(2);
+  @$pb.TagNumber(3)
+  set updatedAt($2.Timestamp v) { setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasUpdatedAt() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearUpdatedAt() => clearField(3);
+  @$pb.TagNumber(3)
+  $2.Timestamp ensureUpdatedAt() => $_ensure(2);
+
+  @$pb.TagNumber(4)
+  $core.String get mainIdentifier => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set mainIdentifier($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasMainIdentifier() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearMainIdentifier() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.String get traitsId => $_getSZ(4);
+  @$pb.TagNumber(5)
+  set traitsId($core.String v) { $_setString(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasTraitsId() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearTraitsId() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.List<$core.String> get addressesIds => $_getList(5);
+
+  @$pb.TagNumber(7)
+  $core.Map<$core.String, $core.String> get credentialsIds => $_getMap(6);
+
+  @$pb.TagNumber(8)
+  $core.String get schemaId => $_getSZ(7);
+  @$pb.TagNumber(8)
+  set schemaId($core.String v) { $_setString(7, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasSchemaId() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearSchemaId() => clearField(8);
+
+  @$pb.TagNumber(9)
+  GetIdentityByIdentifierResponse_Identity_Lock get lock => $_getN(8);
+  @$pb.TagNumber(9)
+  set lock(GetIdentityByIdentifierResponse_Identity_Lock v) { setField(9, v); }
+  @$pb.TagNumber(9)
+  $core.bool hasLock() => $_has(8);
+  @$pb.TagNumber(9)
+  void clearLock() => clearField(9);
+}
+
+class GetIdentityByIdentifierResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetIdentityByIdentifierResponse', package: const $pb.PackageName('depot.devtools.auth.v0.identity.admin'), createEmptyInstance: create)
+    ..aOM<GetIdentityByIdentifierResponse_Identity>(1, 'identity', subBuilder: GetIdentityByIdentifierResponse_Identity.create)
+    ..hasRequiredFields = false
+  ;
+
+  GetIdentityByIdentifierResponse._() : super();
+  factory GetIdentityByIdentifierResponse() => create();
+  factory GetIdentityByIdentifierResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetIdentityByIdentifierResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  GetIdentityByIdentifierResponse clone() => GetIdentityByIdentifierResponse()..mergeFromMessage(this);
+  GetIdentityByIdentifierResponse copyWith(void Function(GetIdentityByIdentifierResponse) updates) => super.copyWith((message) => updates(message as GetIdentityByIdentifierResponse));
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static GetIdentityByIdentifierResponse create() => GetIdentityByIdentifierResponse._();
+  GetIdentityByIdentifierResponse createEmptyInstance() => create();
+  static $pb.PbList<GetIdentityByIdentifierResponse> createRepeated() => $pb.PbList<GetIdentityByIdentifierResponse>();
+  @$core.pragma('dart2js:noInline')
+  static GetIdentityByIdentifierResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetIdentityByIdentifierResponse>(create);
+  static GetIdentityByIdentifierResponse _defaultInstance;
+
+  @$pb.TagNumber(1)
+  GetIdentityByIdentifierResponse_Identity get identity => $_getN(0);
+  @$pb.TagNumber(1)
+  set identity(GetIdentityByIdentifierResponse_Identity v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasIdentity() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearIdentity() => clearField(1);
+  @$pb.TagNumber(1)
+  GetIdentityByIdentifierResponse_Identity ensureIdentity() => $_ensure(0);
 }
 
 class GetIdentitiesByAttributeRequest extends $pb.GeneratedMessage {

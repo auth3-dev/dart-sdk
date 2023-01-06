@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:auth3_login/auth3_login.dart';
 import 'config.dart';
 
 void main() {
@@ -31,9 +30,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   Map<String, dynamic> _profile = {};
-
-  // Optionally, specify different "callbackUri" and "webCallbackUri" for Flutter Web.
-  Auth3Login auth3 = Auth3Login(clientId: AUTH3_CLIENT_ID);
 
   void initState() {
     super.initState();

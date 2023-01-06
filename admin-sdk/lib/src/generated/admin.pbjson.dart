@@ -112,12 +112,18 @@ const CreateIdentityResponse$json = const {
 
 const GetIdentitiesRequest$json = const {
   '1': 'GetIdentitiesRequest',
+  '2': const [
+    const {'1': 'page_size', '3': 1, '4': 1, '5': 5, '10': 'pageSize'},
+    const {'1': 'page_token', '3': 2, '4': 1, '5': 9, '10': 'pageToken'},
+  ],
 };
 
 const GetIdentitiesResponse$json = const {
   '1': 'GetIdentitiesResponse',
   '2': const [
     const {'1': 'identities', '3': 1, '4': 3, '5': 11, '6': '.depot.devtools.auth.v0.identity.admin.GetIdentitiesResponse.Identity', '10': 'identities'},
+    const {'1': 'next_page_token', '3': 2, '4': 1, '5': 9, '10': 'nextPageToken'},
+    const {'1': 'total_size', '3': 3, '4': 1, '5': 5, '10': 'totalSize'},
   ],
   '3': const [GetIdentitiesResponse_Identity$json],
   '4': const [GetIdentitiesResponse_Lock$json],
@@ -177,6 +183,57 @@ const GetIdentityResponse_CredentialsIdsEntry$json = const {
 };
 
 const GetIdentityResponse_Lock$json = const {
+  '1': 'Lock',
+  '2': const [
+    const {'1': 'UNLOCKED', '2': 0},
+    const {'1': 'ADMIN_LOCKED', '2': 1},
+  ],
+};
+
+const GetIdentityByIdentifierRequest$json = const {
+  '1': 'GetIdentityByIdentifierRequest',
+  '2': const [
+    const {'1': 'attribute', '3': 1, '4': 1, '5': 9, '10': 'attribute'},
+    const {'1': 'value', '3': 2, '4': 1, '5': 9, '10': 'value'},
+    const {'1': 'connection_id', '3': 3, '4': 1, '5': 9, '10': 'connectionId'},
+  ],
+};
+
+const GetIdentityByIdentifierResponse$json = const {
+  '1': 'GetIdentityByIdentifierResponse',
+  '2': const [
+    const {'1': 'identity', '3': 1, '4': 1, '5': 11, '6': '.depot.devtools.auth.v0.identity.admin.GetIdentityByIdentifierResponse.Identity', '10': 'identity'},
+  ],
+  '3': const [GetIdentityByIdentifierResponse_Identity$json],
+};
+
+const GetIdentityByIdentifierResponse_Identity$json = const {
+  '1': 'Identity',
+  '2': const [
+    const {'1': 'identity_id', '3': 1, '4': 1, '5': 9, '10': 'identityId'},
+    const {'1': 'created_at', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
+    const {'1': 'updated_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
+    const {'1': 'main_identifier', '3': 4, '4': 1, '5': 9, '10': 'mainIdentifier'},
+    const {'1': 'traits_id', '3': 5, '4': 1, '5': 9, '10': 'traitsId'},
+    const {'1': 'addresses_ids', '3': 6, '4': 3, '5': 9, '10': 'addressesIds'},
+    const {'1': 'credentials_ids', '3': 7, '4': 3, '5': 11, '6': '.depot.devtools.auth.v0.identity.admin.GetIdentityByIdentifierResponse.Identity.CredentialsIdsEntry', '10': 'credentialsIds'},
+    const {'1': 'schema_id', '3': 8, '4': 1, '5': 9, '10': 'schemaId'},
+    const {'1': 'lock', '3': 9, '4': 1, '5': 14, '6': '.depot.devtools.auth.v0.identity.admin.GetIdentityByIdentifierResponse.Identity.Lock', '10': 'lock'},
+  ],
+  '3': const [GetIdentityByIdentifierResponse_Identity_CredentialsIdsEntry$json],
+  '4': const [GetIdentityByIdentifierResponse_Identity_Lock$json],
+};
+
+const GetIdentityByIdentifierResponse_Identity_CredentialsIdsEntry$json = const {
+  '1': 'CredentialsIdsEntry',
+  '2': const [
+    const {'1': 'key', '3': 1, '4': 1, '5': 9, '10': 'key'},
+    const {'1': 'value', '3': 2, '4': 1, '5': 9, '10': 'value'},
+  ],
+  '7': const {'7': true},
+};
+
+const GetIdentityByIdentifierResponse_Identity_Lock$json = const {
   '1': 'Lock',
   '2': const [
     const {'1': 'UNLOCKED', '2': 0},

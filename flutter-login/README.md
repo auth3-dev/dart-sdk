@@ -37,6 +37,48 @@ Then run:
 pub get
 ```
 
+## Setup
+
+### Android
+
+In order to capture the callback url, the following activity needs to be added to your `AndroidManifest.xml`. Be sure to relpace `YOUR_CALLBACK_URL_SCHEME_HERE` with your actual callback url scheme (`auth3` by default on mobile platforms, `https` on the web).
+
+```xml
+<manifest>
+  <application>
+
+    <activity android:name="com.linusu.flutter_web_auth.CallbackActivity" android:exported="true">
+      <intent-filter android:label="flutter_web_auth">
+        <action android:name="android.intent.action.VIEW" />
+        <category android:name="android.intent.category.DEFAULT" />
+        <category android:name="android.intent.category.BROWSABLE" />
+        <data android:scheme="YOUR_CALLBACK_URL_SCHEME_HERE" />
+      </intent-filter>
+    </activity>
+
+  </application>
+</manifest>
+```
+
+### Web
+
+On the Web platform an endpoint must to be created that captures the callback URL and sends it to the application using the JavaScript `postMessage()` method. In the `./web` folder of the project, create an HTML file with the name e.g. `auth.html` with content:
+
+```html
+<!DOCTYPE html>
+<html>
+  <title>Authentication completed</title>
+  <p>If this does not happen automatically, please close the window.</p>
+
+  <script>
+    window.opener.postMessage({
+      'flutter-web-auth': window.location.href
+    }, window.location.origin);
+    window.close();
+  </script>
+</html>
+```
+
 ## Looking to integrate with your backends?
 
 Check out our official SDKs to integrate with the Administrative API to integrate and manipulate your Auth3 identities:
