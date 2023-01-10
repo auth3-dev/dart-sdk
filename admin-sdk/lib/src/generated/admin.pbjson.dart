@@ -574,7 +574,6 @@ const GetConnectionsResponse_Purposes$json = const {
 const UpdateConnectionRequest$json = const {
   '1': 'UpdateConnectionRequest',
   '2': const [
-    const {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
     const {'1': 'client_id', '3': 2, '4': 1, '5': 9, '10': 'clientId'},
     const {'1': 'client_secret', '3': 3, '4': 1, '5': 9, '10': 'clientSecret'},
     const {'1': 'button_image_url', '3': 4, '4': 1, '5': 9, '10': 'buttonImageUrl'},
@@ -586,6 +585,9 @@ const UpdateConnectionRequest$json = const {
     const {'1': 'scopes', '3': 11, '4': 1, '5': 9, '10': 'scopes'},
   ],
   '4': const [UpdateConnectionRequest_Providers$json, UpdateConnectionRequest_Types$json],
+  '9': const [
+    const {'1': 1, '2': 2},
+  ],
 };
 
 const UpdateConnectionRequest_Providers$json = const {

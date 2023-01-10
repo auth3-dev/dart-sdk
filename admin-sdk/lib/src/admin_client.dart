@@ -121,7 +121,6 @@ class AdminClient {
   /// Please refer to https://docs.auth3.dev/apis/identity-platform/administrative#updateconnection
   Future<grpc_api.UpdateConnectionResponse> updateConnection({
     String id,
-    String name,
     String clientId,
     String clientSecret,
     String buttonImageUrl,
@@ -135,7 +134,6 @@ class AdminClient {
 
     var data = grpc_api.UpdateConnectionRequest();
     data.id = id ?? '';
-    data.name = name;
     data.clientId = clientId ?? '';
     data.clientSecret = clientSecret ?? '';
     data.buttonImageUrl = buttonImageUrl ?? '';
@@ -338,14 +336,15 @@ class AdminClient {
   }
 
   /// Please refer to https://docs.auth3.dev/apis/identity-platform/administrative#getidentities
-  Future<grpc_api.GetIdentitiesResponse> getIdentities({int pageSize = 0, String pageToken = ""}) async {
+  Future<grpc_api.GetIdentitiesResponse> getIdentities(
+      {int pageSize = 0, String pageToken = ""}) async {
     var client = grpc_api.AdminClient(GrpcClientSingleton(url: url).client);
     var data = grpc_api.GetIdentitiesRequest();
 
     if (pageSize > 0) {
       data.pageSize = pageSize;
     }
-    
+
     data.pageToken = pageToken;
 
     return await client.getIdentities(data, options: options);

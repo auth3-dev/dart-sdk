@@ -1410,7 +1410,6 @@ class GetConnectionsResponse extends $pb.GeneratedMessage {
 
 class UpdateConnectionRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('UpdateConnectionRequest', package: const $pb.PackageName('depot.devtools.auth.v0.identity.admin'), createEmptyInstance: create)
-    ..aOS(1, 'name')
     ..aOS(2, 'clientId')
     ..aOS(3, 'clientSecret')
     ..aOS(4, 'buttonImageUrl')
@@ -1438,87 +1437,78 @@ class UpdateConnectionRequest extends $pb.GeneratedMessage {
   static UpdateConnectionRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateConnectionRequest>(create);
   static UpdateConnectionRequest _defaultInstance;
 
-  @$pb.TagNumber(1)
-  $core.String get name => $_getSZ(0);
-  @$pb.TagNumber(1)
-  set name($core.String v) { $_setString(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasName() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearName() => clearField(1);
-
   @$pb.TagNumber(2)
-  $core.String get clientId => $_getSZ(1);
+  $core.String get clientId => $_getSZ(0);
   @$pb.TagNumber(2)
-  set clientId($core.String v) { $_setString(1, v); }
+  set clientId($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(2)
-  $core.bool hasClientId() => $_has(1);
+  $core.bool hasClientId() => $_has(0);
   @$pb.TagNumber(2)
   void clearClientId() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.String get clientSecret => $_getSZ(2);
+  $core.String get clientSecret => $_getSZ(1);
   @$pb.TagNumber(3)
-  set clientSecret($core.String v) { $_setString(2, v); }
+  set clientSecret($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(3)
-  $core.bool hasClientSecret() => $_has(2);
+  $core.bool hasClientSecret() => $_has(1);
   @$pb.TagNumber(3)
   void clearClientSecret() => clearField(3);
 
   @$pb.TagNumber(4)
-  $core.String get buttonImageUrl => $_getSZ(3);
+  $core.String get buttonImageUrl => $_getSZ(2);
   @$pb.TagNumber(4)
-  set buttonImageUrl($core.String v) { $_setString(3, v); }
+  set buttonImageUrl($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(4)
-  $core.bool hasButtonImageUrl() => $_has(3);
+  $core.bool hasButtonImageUrl() => $_has(2);
   @$pb.TagNumber(4)
   void clearButtonImageUrl() => clearField(4);
 
   @$pb.TagNumber(6)
-  UpdateConnectionRequest_Providers get provider => $_getN(4);
+  UpdateConnectionRequest_Providers get provider => $_getN(3);
   @$pb.TagNumber(6)
   set provider(UpdateConnectionRequest_Providers v) { setField(6, v); }
   @$pb.TagNumber(6)
-  $core.bool hasProvider() => $_has(4);
+  $core.bool hasProvider() => $_has(3);
   @$pb.TagNumber(6)
   void clearProvider() => clearField(6);
 
   @$pb.TagNumber(7)
-  $core.String get oidcDiscoveryUrl => $_getSZ(5);
+  $core.String get oidcDiscoveryUrl => $_getSZ(4);
   @$pb.TagNumber(7)
-  set oidcDiscoveryUrl($core.String v) { $_setString(5, v); }
+  set oidcDiscoveryUrl($core.String v) { $_setString(4, v); }
   @$pb.TagNumber(7)
-  $core.bool hasOidcDiscoveryUrl() => $_has(5);
+  $core.bool hasOidcDiscoveryUrl() => $_has(4);
   @$pb.TagNumber(7)
   void clearOidcDiscoveryUrl() => clearField(7);
 
   @$pb.TagNumber(8)
-  $core.List<$core.String> get mfa => $_getList(6);
+  $core.List<$core.String> get mfa => $_getList(5);
 
   @$pb.TagNumber(9)
-  UpdateConnectionRequest_Types get type => $_getN(7);
+  UpdateConnectionRequest_Types get type => $_getN(6);
   @$pb.TagNumber(9)
   set type(UpdateConnectionRequest_Types v) { setField(9, v); }
   @$pb.TagNumber(9)
-  $core.bool hasType() => $_has(7);
+  $core.bool hasType() => $_has(6);
   @$pb.TagNumber(9)
   void clearType() => clearField(9);
 
   @$pb.TagNumber(10)
-  $core.String get id => $_getSZ(8);
+  $core.String get id => $_getSZ(7);
   @$pb.TagNumber(10)
-  set id($core.String v) { $_setString(8, v); }
+  set id($core.String v) { $_setString(7, v); }
   @$pb.TagNumber(10)
-  $core.bool hasId() => $_has(8);
+  $core.bool hasId() => $_has(7);
   @$pb.TagNumber(10)
   void clearId() => clearField(10);
 
   @$pb.TagNumber(11)
-  $core.String get scopes => $_getSZ(9);
+  $core.String get scopes => $_getSZ(8);
   @$pb.TagNumber(11)
-  set scopes($core.String v) { $_setString(9, v); }
+  set scopes($core.String v) { $_setString(8, v); }
   @$pb.TagNumber(11)
-  $core.bool hasScopes() => $_has(9);
+  $core.bool hasScopes() => $_has(8);
   @$pb.TagNumber(11)
   void clearScopes() => clearField(11);
 }
