@@ -163,7 +163,7 @@ const GetIdentityResponse$json = const {
     const {'1': 'created_at', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
     const {'1': 'updated_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
     const {'1': 'main_identifier', '3': 4, '4': 1, '5': 9, '10': 'mainIdentifier'},
-    const {'1': 'traits_id', '3': 5, '4': 1, '5': 9, '10': 'traitsId'},
+    const {'1': 'profile_id', '3': 5, '4': 1, '5': 9, '10': 'profileId'},
     const {'1': 'addresses_ids', '3': 6, '4': 3, '5': 9, '10': 'addressesIds'},
     const {'1': 'credentials_ids', '3': 7, '4': 3, '5': 11, '6': '.depot.devtools.auth.v0.identity.admin.GetIdentityResponse.CredentialsIdsEntry', '10': 'credentialsIds'},
     const {'1': 'schema_id', '3': 8, '4': 1, '5': 9, '10': 'schemaId'},
@@ -214,7 +214,7 @@ const GetIdentityByIdentifierResponse_Identity$json = const {
     const {'1': 'created_at', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
     const {'1': 'updated_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
     const {'1': 'main_identifier', '3': 4, '4': 1, '5': 9, '10': 'mainIdentifier'},
-    const {'1': 'traits_id', '3': 5, '4': 1, '5': 9, '10': 'traitsId'},
+    const {'1': 'profile_id', '3': 5, '4': 1, '5': 9, '10': 'profileId'},
     const {'1': 'addresses_ids', '3': 6, '4': 3, '5': 9, '10': 'addressesIds'},
     const {'1': 'credentials_ids', '3': 7, '4': 3, '5': 11, '6': '.depot.devtools.auth.v0.identity.admin.GetIdentityByIdentifierResponse.Identity.CredentialsIdsEntry', '10': 'credentialsIds'},
     const {'1': 'schema_id', '3': 8, '4': 1, '5': 9, '10': 'schemaId'},
@@ -264,7 +264,7 @@ const GetIdentitiesByAttributeResponse_Identity$json = const {
     const {'1': 'created_at', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'createdAt'},
     const {'1': 'updated_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
     const {'1': 'main_identifier', '3': 4, '4': 1, '5': 9, '10': 'mainIdentifier'},
-    const {'1': 'traits_id', '3': 5, '4': 1, '5': 9, '10': 'traitsId'},
+    const {'1': 'profile_id', '3': 5, '4': 1, '5': 9, '10': 'profileId'},
     const {'1': 'addresses_ids', '3': 6, '4': 3, '5': 9, '10': 'addressesIds'},
     const {'1': 'credentials_ids', '3': 7, '4': 3, '5': 11, '6': '.depot.devtools.auth.v0.identity.admin.GetIdentitiesByAttributeResponse.Identity.CredentialsIdsEntry', '10': 'credentialsIds'},
     const {'1': 'schema_id', '3': 8, '4': 1, '5': 9, '10': 'schemaId'},
@@ -346,7 +346,7 @@ const GetCredentialsResponse_Credential$json = const {
     const {'1': 'updated_at', '3': 3, '4': 1, '5': 11, '6': '.google.protobuf.Timestamp', '10': 'updatedAt'},
     const {'1': 'identity_id', '3': 4, '4': 1, '5': 9, '10': 'identityId'},
     const {'1': 'type', '3': 5, '4': 1, '5': 5, '10': 'type'},
-    const {'1': 'name', '3': 6, '4': 1, '5': 9, '10': 'name'},
+    const {'1': 'connection_id', '3': 6, '4': 1, '5': 9, '10': 'connectionId'},
     const {'1': 'configured', '3': 7, '4': 1, '5': 8, '10': 'configured'},
   ],
 };
@@ -376,7 +376,7 @@ const UpdateCredentialResponse$json = const {
 const CreateConnectionRequest$json = const {
   '1': 'CreateConnectionRequest',
   '2': const [
-    const {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
+    const {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
     const {'1': 'client_id', '3': 2, '4': 1, '5': 9, '10': 'clientId'},
     const {'1': 'client_secret', '3': 3, '4': 1, '5': 9, '10': 'clientSecret'},
     const {'1': 'button_image_url', '3': 4, '4': 1, '5': 9, '10': 'buttonImageUrl'},
@@ -460,7 +460,7 @@ const CreateConnectionRequest_Types$json = const {
 const CreateConnectionResponse$json = const {
   '1': 'CreateConnectionResponse',
   '2': const [
-    const {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
+    const {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
   ],
 };
 
@@ -480,7 +480,7 @@ const GetConnectionsResponse$json = const {
 const GetConnectionsResponse_Connection$json = const {
   '1': 'Connection',
   '2': const [
-    const {'1': 'name', '3': 1, '4': 1, '5': 9, '10': 'name'},
+    const {'1': 'id', '3': 1, '4': 1, '5': 9, '10': 'id'},
     const {'1': 'client_id', '3': 2, '4': 1, '5': 9, '10': 'clientId'},
     const {'1': 'client_secret', '3': 3, '4': 1, '5': 9, '10': 'clientSecret'},
     const {'1': 'button_image_url', '3': 4, '4': 1, '5': 9, '10': 'buttonImageUrl'},
@@ -488,9 +488,8 @@ const GetConnectionsResponse_Connection$json = const {
     const {'1': 'oidc_discovery_url', '3': 7, '4': 1, '5': 9, '10': 'oidcDiscoveryUrl'},
     const {'1': 'mfa', '3': 8, '4': 3, '5': 9, '10': 'mfa'},
     const {'1': 'type', '3': 9, '4': 1, '5': 14, '6': '.depot.devtools.auth.v0.identity.admin.GetConnectionsResponse.Types', '10': 'type'},
-    const {'1': 'id', '3': 10, '4': 1, '5': 9, '10': 'id'},
-    const {'1': 'scopes', '3': 11, '4': 1, '5': 9, '10': 'scopes'},
-    const {'1': 'purpose', '3': 12, '4': 1, '5': 14, '6': '.depot.devtools.auth.v0.identity.admin.GetConnectionsResponse.Purposes', '10': 'purpose'},
+    const {'1': 'scopes', '3': 10, '4': 1, '5': 9, '10': 'scopes'},
+    const {'1': 'purpose', '3': 11, '4': 1, '5': 14, '6': '.depot.devtools.auth.v0.identity.admin.GetConnectionsResponse.Purposes', '10': 'purpose'},
   ],
 };
 
@@ -889,30 +888,30 @@ const UpdateAddressResponse$json = const {
   '1': 'UpdateAddressResponse',
 };
 
-const GetTraitsRequest$json = const {
-  '1': 'GetTraitsRequest',
+const GetProfileRequest$json = const {
+  '1': 'GetProfileRequest',
   '2': const [
     const {'1': 'identity_id', '3': 1, '4': 1, '5': 9, '10': 'identityId'},
   ],
 };
 
-const GetTraitsResponse$json = const {
-  '1': 'GetTraitsResponse',
+const GetProfileResponse$json = const {
+  '1': 'GetProfileResponse',
   '2': const [
-    const {'1': 'traits', '3': 1, '4': 1, '5': 9, '10': 'traits'},
+    const {'1': 'profile', '3': 1, '4': 1, '5': 9, '10': 'profile'},
   ],
 };
 
-const UpdateTraitsRequest$json = const {
-  '1': 'UpdateTraitsRequest',
+const UpdateProfileRequest$json = const {
+  '1': 'UpdateProfileRequest',
   '2': const [
     const {'1': 'identity_id', '3': 1, '4': 1, '5': 9, '10': 'identityId'},
-    const {'1': 'traits', '3': 2, '4': 1, '5': 9, '10': 'traits'},
+    const {'1': 'profile', '3': 2, '4': 1, '5': 9, '10': 'profile'},
   ],
 };
 
-const UpdateTraitsResponse$json = const {
-  '1': 'UpdateTraitsResponse',
+const UpdateProfileResponse$json = const {
+  '1': 'UpdateProfileResponse',
 };
 
 const GetIdentityLoginAttemptsRequest$json = const {

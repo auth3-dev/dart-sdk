@@ -309,7 +309,7 @@ class GetIdentityResponse extends $pb.GeneratedMessage {
     ..aOM<$2.Timestamp>(2, 'createdAt', subBuilder: $2.Timestamp.create)
     ..aOM<$2.Timestamp>(3, 'updatedAt', subBuilder: $2.Timestamp.create)
     ..aOS(4, 'mainIdentifier')
-    ..aOS(5, 'traitsId')
+    ..aOS(5, 'profileId')
     ..pPS(6, 'addressesIds')
     ..m<$core.String, $core.String>(7, 'credentialsIds', entryClassName: 'GetIdentityResponse.CredentialsIdsEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OS, packageName: const $pb.PackageName('depot.devtools.auth.v0.identity.admin'))
     ..aOS(8, 'schemaId')
@@ -373,13 +373,13 @@ class GetIdentityResponse extends $pb.GeneratedMessage {
   void clearMainIdentifier() => clearField(4);
 
   @$pb.TagNumber(5)
-  $core.String get traitsId => $_getSZ(4);
+  $core.String get profileId => $_getSZ(4);
   @$pb.TagNumber(5)
-  set traitsId($core.String v) { $_setString(4, v); }
+  set profileId($core.String v) { $_setString(4, v); }
   @$pb.TagNumber(5)
-  $core.bool hasTraitsId() => $_has(4);
+  $core.bool hasProfileId() => $_has(4);
   @$pb.TagNumber(5)
-  void clearTraitsId() => clearField(5);
+  void clearProfileId() => clearField(5);
 
   @$pb.TagNumber(6)
   $core.List<$core.String> get addressesIds => $_getList(5);
@@ -463,7 +463,7 @@ class GetIdentityByIdentifierResponse_Identity extends $pb.GeneratedMessage {
     ..aOM<$2.Timestamp>(2, 'createdAt', subBuilder: $2.Timestamp.create)
     ..aOM<$2.Timestamp>(3, 'updatedAt', subBuilder: $2.Timestamp.create)
     ..aOS(4, 'mainIdentifier')
-    ..aOS(5, 'traitsId')
+    ..aOS(5, 'profileId')
     ..pPS(6, 'addressesIds')
     ..m<$core.String, $core.String>(7, 'credentialsIds', entryClassName: 'GetIdentityByIdentifierResponse.Identity.CredentialsIdsEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OS, packageName: const $pb.PackageName('depot.devtools.auth.v0.identity.admin'))
     ..aOS(8, 'schemaId')
@@ -527,13 +527,13 @@ class GetIdentityByIdentifierResponse_Identity extends $pb.GeneratedMessage {
   void clearMainIdentifier() => clearField(4);
 
   @$pb.TagNumber(5)
-  $core.String get traitsId => $_getSZ(4);
+  $core.String get profileId => $_getSZ(4);
   @$pb.TagNumber(5)
-  set traitsId($core.String v) { $_setString(4, v); }
+  set profileId($core.String v) { $_setString(4, v); }
   @$pb.TagNumber(5)
-  $core.bool hasTraitsId() => $_has(4);
+  $core.bool hasProfileId() => $_has(4);
   @$pb.TagNumber(5)
-  void clearTraitsId() => clearField(5);
+  void clearProfileId() => clearField(5);
 
   @$pb.TagNumber(6)
   $core.List<$core.String> get addressesIds => $_getList(5);
@@ -640,7 +640,7 @@ class GetIdentitiesByAttributeResponse_Identity extends $pb.GeneratedMessage {
     ..aOM<$2.Timestamp>(2, 'createdAt', subBuilder: $2.Timestamp.create)
     ..aOM<$2.Timestamp>(3, 'updatedAt', subBuilder: $2.Timestamp.create)
     ..aOS(4, 'mainIdentifier')
-    ..aOS(5, 'traitsId')
+    ..aOS(5, 'profileId')
     ..pPS(6, 'addressesIds')
     ..m<$core.String, $core.String>(7, 'credentialsIds', entryClassName: 'GetIdentitiesByAttributeResponse.Identity.CredentialsIdsEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OS, packageName: const $pb.PackageName('depot.devtools.auth.v0.identity.admin'))
     ..aOS(8, 'schemaId')
@@ -704,13 +704,13 @@ class GetIdentitiesByAttributeResponse_Identity extends $pb.GeneratedMessage {
   void clearMainIdentifier() => clearField(4);
 
   @$pb.TagNumber(5)
-  $core.String get traitsId => $_getSZ(4);
+  $core.String get profileId => $_getSZ(4);
   @$pb.TagNumber(5)
-  set traitsId($core.String v) { $_setString(4, v); }
+  set profileId($core.String v) { $_setString(4, v); }
   @$pb.TagNumber(5)
-  $core.bool hasTraitsId() => $_has(4);
+  $core.bool hasProfileId() => $_has(4);
   @$pb.TagNumber(5)
-  void clearTraitsId() => clearField(5);
+  void clearProfileId() => clearField(5);
 
   @$pb.TagNumber(6)
   $core.List<$core.String> get addressesIds => $_getList(5);
@@ -914,7 +914,7 @@ class GetCredentialsResponse_Credential extends $pb.GeneratedMessage {
     ..aOM<$2.Timestamp>(3, 'updatedAt', subBuilder: $2.Timestamp.create)
     ..aOS(4, 'identityId')
     ..a<$core.int>(5, 'type', $pb.PbFieldType.O3)
-    ..aOS(6, 'name')
+    ..aOS(6, 'connectionId')
     ..aOB(7, 'configured')
     ..hasRequiredFields = false
   ;
@@ -984,13 +984,13 @@ class GetCredentialsResponse_Credential extends $pb.GeneratedMessage {
   void clearType() => clearField(5);
 
   @$pb.TagNumber(6)
-  $core.String get name => $_getSZ(5);
+  $core.String get connectionId => $_getSZ(5);
   @$pb.TagNumber(6)
-  set name($core.String v) { $_setString(5, v); }
+  set connectionId($core.String v) { $_setString(5, v); }
   @$pb.TagNumber(6)
-  $core.bool hasName() => $_has(5);
+  $core.bool hasConnectionId() => $_has(5);
   @$pb.TagNumber(6)
-  void clearName() => clearField(6);
+  void clearConnectionId() => clearField(6);
 
   @$pb.TagNumber(7)
   $core.bool get configured => $_getBF(6);
@@ -1103,7 +1103,7 @@ class UpdateCredentialResponse extends $pb.GeneratedMessage {
 
 class CreateConnectionRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('CreateConnectionRequest', package: const $pb.PackageName('depot.devtools.auth.v0.identity.admin'), createEmptyInstance: create)
-    ..aOS(1, 'name')
+    ..aOS(1, 'id')
     ..aOS(2, 'clientId')
     ..aOS(3, 'clientSecret')
     ..aOS(4, 'buttonImageUrl')
@@ -1131,13 +1131,13 @@ class CreateConnectionRequest extends $pb.GeneratedMessage {
   static CreateConnectionRequest _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get name => $_getSZ(0);
+  $core.String get id => $_getSZ(0);
   @$pb.TagNumber(1)
-  set name($core.String v) { $_setString(0, v); }
+  set id($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasName() => $_has(0);
+  $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
-  void clearName() => clearField(1);
+  void clearId() => clearField(1);
 
   @$pb.TagNumber(2)
   $core.String get clientId => $_getSZ(1);
@@ -1208,7 +1208,7 @@ class CreateConnectionRequest extends $pb.GeneratedMessage {
 
 class CreateConnectionResponse extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('CreateConnectionResponse', package: const $pb.PackageName('depot.devtools.auth.v0.identity.admin'), createEmptyInstance: create)
-    ..aOS(1, 'name')
+    ..aOS(1, 'id')
     ..hasRequiredFields = false
   ;
 
@@ -1228,13 +1228,13 @@ class CreateConnectionResponse extends $pb.GeneratedMessage {
   static CreateConnectionResponse _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get name => $_getSZ(0);
+  $core.String get id => $_getSZ(0);
   @$pb.TagNumber(1)
-  set name($core.String v) { $_setString(0, v); }
+  set id($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasName() => $_has(0);
+  $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
-  void clearName() => clearField(1);
+  void clearId() => clearField(1);
 }
 
 class GetConnectionsRequest extends $pb.GeneratedMessage {
@@ -1260,7 +1260,7 @@ class GetConnectionsRequest extends $pb.GeneratedMessage {
 
 class GetConnectionsResponse_Connection extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetConnectionsResponse.Connection', package: const $pb.PackageName('depot.devtools.auth.v0.identity.admin'), createEmptyInstance: create)
-    ..aOS(1, 'name')
+    ..aOS(1, 'id')
     ..aOS(2, 'clientId')
     ..aOS(3, 'clientSecret')
     ..aOS(4, 'buttonImageUrl')
@@ -1268,9 +1268,8 @@ class GetConnectionsResponse_Connection extends $pb.GeneratedMessage {
     ..aOS(7, 'oidcDiscoveryUrl')
     ..pPS(8, 'mfa')
     ..e<GetConnectionsResponse_Types>(9, 'type', $pb.PbFieldType.OE, defaultOrMaker: GetConnectionsResponse_Types.UNSET, valueOf: GetConnectionsResponse_Types.valueOf, enumValues: GetConnectionsResponse_Types.values)
-    ..aOS(10, 'id')
-    ..aOS(11, 'scopes')
-    ..e<GetConnectionsResponse_Purposes>(12, 'purpose', $pb.PbFieldType.OE, defaultOrMaker: GetConnectionsResponse_Purposes.PURPOSE_UNKNOWN, valueOf: GetConnectionsResponse_Purposes.valueOf, enumValues: GetConnectionsResponse_Purposes.values)
+    ..aOS(10, 'scopes')
+    ..e<GetConnectionsResponse_Purposes>(11, 'purpose', $pb.PbFieldType.OE, defaultOrMaker: GetConnectionsResponse_Purposes.PURPOSE_UNKNOWN, valueOf: GetConnectionsResponse_Purposes.valueOf, enumValues: GetConnectionsResponse_Purposes.values)
     ..hasRequiredFields = false
   ;
 
@@ -1290,13 +1289,13 @@ class GetConnectionsResponse_Connection extends $pb.GeneratedMessage {
   static GetConnectionsResponse_Connection _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get name => $_getSZ(0);
+  $core.String get id => $_getSZ(0);
   @$pb.TagNumber(1)
-  set name($core.String v) { $_setString(0, v); }
+  set id($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasName() => $_has(0);
+  $core.bool hasId() => $_has(0);
   @$pb.TagNumber(1)
-  void clearName() => clearField(1);
+  void clearId() => clearField(1);
 
   @$pb.TagNumber(2)
   $core.String get clientId => $_getSZ(1);
@@ -1356,31 +1355,22 @@ class GetConnectionsResponse_Connection extends $pb.GeneratedMessage {
   void clearType() => clearField(9);
 
   @$pb.TagNumber(10)
-  $core.String get id => $_getSZ(8);
+  $core.String get scopes => $_getSZ(8);
   @$pb.TagNumber(10)
-  set id($core.String v) { $_setString(8, v); }
+  set scopes($core.String v) { $_setString(8, v); }
   @$pb.TagNumber(10)
-  $core.bool hasId() => $_has(8);
+  $core.bool hasScopes() => $_has(8);
   @$pb.TagNumber(10)
-  void clearId() => clearField(10);
+  void clearScopes() => clearField(10);
 
   @$pb.TagNumber(11)
-  $core.String get scopes => $_getSZ(9);
+  GetConnectionsResponse_Purposes get purpose => $_getN(9);
   @$pb.TagNumber(11)
-  set scopes($core.String v) { $_setString(9, v); }
+  set purpose(GetConnectionsResponse_Purposes v) { setField(11, v); }
   @$pb.TagNumber(11)
-  $core.bool hasScopes() => $_has(9);
+  $core.bool hasPurpose() => $_has(9);
   @$pb.TagNumber(11)
-  void clearScopes() => clearField(11);
-
-  @$pb.TagNumber(12)
-  GetConnectionsResponse_Purposes get purpose => $_getN(10);
-  @$pb.TagNumber(12)
-  set purpose(GetConnectionsResponse_Purposes v) { setField(12, v); }
-  @$pb.TagNumber(12)
-  $core.bool hasPurpose() => $_has(10);
-  @$pb.TagNumber(12)
-  void clearPurpose() => clearField(12);
+  void clearPurpose() => clearField(11);
 }
 
 class GetConnectionsResponse extends $pb.GeneratedMessage {
@@ -2992,26 +2982,26 @@ class UpdateAddressResponse extends $pb.GeneratedMessage {
   static UpdateAddressResponse _defaultInstance;
 }
 
-class GetTraitsRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetTraitsRequest', package: const $pb.PackageName('depot.devtools.auth.v0.identity.admin'), createEmptyInstance: create)
+class GetProfileRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetProfileRequest', package: const $pb.PackageName('depot.devtools.auth.v0.identity.admin'), createEmptyInstance: create)
     ..aOS(1, 'identityId')
     ..hasRequiredFields = false
   ;
 
-  GetTraitsRequest._() : super();
-  factory GetTraitsRequest() => create();
-  factory GetTraitsRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory GetTraitsRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  GetTraitsRequest clone() => GetTraitsRequest()..mergeFromMessage(this);
-  GetTraitsRequest copyWith(void Function(GetTraitsRequest) updates) => super.copyWith((message) => updates(message as GetTraitsRequest));
+  GetProfileRequest._() : super();
+  factory GetProfileRequest() => create();
+  factory GetProfileRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetProfileRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  GetProfileRequest clone() => GetProfileRequest()..mergeFromMessage(this);
+  GetProfileRequest copyWith(void Function(GetProfileRequest) updates) => super.copyWith((message) => updates(message as GetProfileRequest));
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static GetTraitsRequest create() => GetTraitsRequest._();
-  GetTraitsRequest createEmptyInstance() => create();
-  static $pb.PbList<GetTraitsRequest> createRepeated() => $pb.PbList<GetTraitsRequest>();
+  static GetProfileRequest create() => GetProfileRequest._();
+  GetProfileRequest createEmptyInstance() => create();
+  static $pb.PbList<GetProfileRequest> createRepeated() => $pb.PbList<GetProfileRequest>();
   @$core.pragma('dart2js:noInline')
-  static GetTraitsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetTraitsRequest>(create);
-  static GetTraitsRequest _defaultInstance;
+  static GetProfileRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetProfileRequest>(create);
+  static GetProfileRequest _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get identityId => $_getSZ(0);
@@ -3023,58 +3013,58 @@ class GetTraitsRequest extends $pb.GeneratedMessage {
   void clearIdentityId() => clearField(1);
 }
 
-class GetTraitsResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetTraitsResponse', package: const $pb.PackageName('depot.devtools.auth.v0.identity.admin'), createEmptyInstance: create)
-    ..aOS(1, 'traits')
+class GetProfileResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('GetProfileResponse', package: const $pb.PackageName('depot.devtools.auth.v0.identity.admin'), createEmptyInstance: create)
+    ..aOS(1, 'profile')
     ..hasRequiredFields = false
   ;
 
-  GetTraitsResponse._() : super();
-  factory GetTraitsResponse() => create();
-  factory GetTraitsResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory GetTraitsResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  GetTraitsResponse clone() => GetTraitsResponse()..mergeFromMessage(this);
-  GetTraitsResponse copyWith(void Function(GetTraitsResponse) updates) => super.copyWith((message) => updates(message as GetTraitsResponse));
+  GetProfileResponse._() : super();
+  factory GetProfileResponse() => create();
+  factory GetProfileResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory GetProfileResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  GetProfileResponse clone() => GetProfileResponse()..mergeFromMessage(this);
+  GetProfileResponse copyWith(void Function(GetProfileResponse) updates) => super.copyWith((message) => updates(message as GetProfileResponse));
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static GetTraitsResponse create() => GetTraitsResponse._();
-  GetTraitsResponse createEmptyInstance() => create();
-  static $pb.PbList<GetTraitsResponse> createRepeated() => $pb.PbList<GetTraitsResponse>();
+  static GetProfileResponse create() => GetProfileResponse._();
+  GetProfileResponse createEmptyInstance() => create();
+  static $pb.PbList<GetProfileResponse> createRepeated() => $pb.PbList<GetProfileResponse>();
   @$core.pragma('dart2js:noInline')
-  static GetTraitsResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetTraitsResponse>(create);
-  static GetTraitsResponse _defaultInstance;
+  static GetProfileResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<GetProfileResponse>(create);
+  static GetProfileResponse _defaultInstance;
 
   @$pb.TagNumber(1)
-  $core.String get traits => $_getSZ(0);
+  $core.String get profile => $_getSZ(0);
   @$pb.TagNumber(1)
-  set traits($core.String v) { $_setString(0, v); }
+  set profile($core.String v) { $_setString(0, v); }
   @$pb.TagNumber(1)
-  $core.bool hasTraits() => $_has(0);
+  $core.bool hasProfile() => $_has(0);
   @$pb.TagNumber(1)
-  void clearTraits() => clearField(1);
+  void clearProfile() => clearField(1);
 }
 
-class UpdateTraitsRequest extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('UpdateTraitsRequest', package: const $pb.PackageName('depot.devtools.auth.v0.identity.admin'), createEmptyInstance: create)
+class UpdateProfileRequest extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('UpdateProfileRequest', package: const $pb.PackageName('depot.devtools.auth.v0.identity.admin'), createEmptyInstance: create)
     ..aOS(1, 'identityId')
-    ..aOS(2, 'traits')
+    ..aOS(2, 'profile')
     ..hasRequiredFields = false
   ;
 
-  UpdateTraitsRequest._() : super();
-  factory UpdateTraitsRequest() => create();
-  factory UpdateTraitsRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory UpdateTraitsRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  UpdateTraitsRequest clone() => UpdateTraitsRequest()..mergeFromMessage(this);
-  UpdateTraitsRequest copyWith(void Function(UpdateTraitsRequest) updates) => super.copyWith((message) => updates(message as UpdateTraitsRequest));
+  UpdateProfileRequest._() : super();
+  factory UpdateProfileRequest() => create();
+  factory UpdateProfileRequest.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UpdateProfileRequest.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  UpdateProfileRequest clone() => UpdateProfileRequest()..mergeFromMessage(this);
+  UpdateProfileRequest copyWith(void Function(UpdateProfileRequest) updates) => super.copyWith((message) => updates(message as UpdateProfileRequest));
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static UpdateTraitsRequest create() => UpdateTraitsRequest._();
-  UpdateTraitsRequest createEmptyInstance() => create();
-  static $pb.PbList<UpdateTraitsRequest> createRepeated() => $pb.PbList<UpdateTraitsRequest>();
+  static UpdateProfileRequest create() => UpdateProfileRequest._();
+  UpdateProfileRequest createEmptyInstance() => create();
+  static $pb.PbList<UpdateProfileRequest> createRepeated() => $pb.PbList<UpdateProfileRequest>();
   @$core.pragma('dart2js:noInline')
-  static UpdateTraitsRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateTraitsRequest>(create);
-  static UpdateTraitsRequest _defaultInstance;
+  static UpdateProfileRequest getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateProfileRequest>(create);
+  static UpdateProfileRequest _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get identityId => $_getSZ(0);
@@ -3086,34 +3076,34 @@ class UpdateTraitsRequest extends $pb.GeneratedMessage {
   void clearIdentityId() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.String get traits => $_getSZ(1);
+  $core.String get profile => $_getSZ(1);
   @$pb.TagNumber(2)
-  set traits($core.String v) { $_setString(1, v); }
+  set profile($core.String v) { $_setString(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasTraits() => $_has(1);
+  $core.bool hasProfile() => $_has(1);
   @$pb.TagNumber(2)
-  void clearTraits() => clearField(2);
+  void clearProfile() => clearField(2);
 }
 
-class UpdateTraitsResponse extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo('UpdateTraitsResponse', package: const $pb.PackageName('depot.devtools.auth.v0.identity.admin'), createEmptyInstance: create)
+class UpdateProfileResponse extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo('UpdateProfileResponse', package: const $pb.PackageName('depot.devtools.auth.v0.identity.admin'), createEmptyInstance: create)
     ..hasRequiredFields = false
   ;
 
-  UpdateTraitsResponse._() : super();
-  factory UpdateTraitsResponse() => create();
-  factory UpdateTraitsResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory UpdateTraitsResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  UpdateTraitsResponse clone() => UpdateTraitsResponse()..mergeFromMessage(this);
-  UpdateTraitsResponse copyWith(void Function(UpdateTraitsResponse) updates) => super.copyWith((message) => updates(message as UpdateTraitsResponse));
+  UpdateProfileResponse._() : super();
+  factory UpdateProfileResponse() => create();
+  factory UpdateProfileResponse.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory UpdateProfileResponse.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  UpdateProfileResponse clone() => UpdateProfileResponse()..mergeFromMessage(this);
+  UpdateProfileResponse copyWith(void Function(UpdateProfileResponse) updates) => super.copyWith((message) => updates(message as UpdateProfileResponse));
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static UpdateTraitsResponse create() => UpdateTraitsResponse._();
-  UpdateTraitsResponse createEmptyInstance() => create();
-  static $pb.PbList<UpdateTraitsResponse> createRepeated() => $pb.PbList<UpdateTraitsResponse>();
+  static UpdateProfileResponse create() => UpdateProfileResponse._();
+  UpdateProfileResponse createEmptyInstance() => create();
+  static $pb.PbList<UpdateProfileResponse> createRepeated() => $pb.PbList<UpdateProfileResponse>();
   @$core.pragma('dart2js:noInline')
-  static UpdateTraitsResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateTraitsResponse>(create);
-  static UpdateTraitsResponse _defaultInstance;
+  static UpdateProfileResponse getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<UpdateProfileResponse>(create);
+  static UpdateProfileResponse _defaultInstance;
 }
 
 class GetIdentityLoginAttemptsRequest extends $pb.GeneratedMessage {

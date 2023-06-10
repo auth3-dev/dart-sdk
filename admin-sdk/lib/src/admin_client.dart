@@ -87,7 +87,7 @@ class AdminClient {
 
   /// Please refer to https://docs.auth3.dev/apis/identity-platform/administrative#createconnection
   Future<grpc_api.CreateConnectionResponse> createConnection({
-    String name,
+    String id,
     String clientId,
     String clientSecret,
     String buttonImageUrl,
@@ -100,7 +100,7 @@ class AdminClient {
     var client = grpc_api.AdminClient(GrpcClientSingleton(url: url).client);
 
     var data = grpc_api.CreateConnectionRequest();
-    data.name = name;
+    data.id = id;
     data.clientId = clientId ?? '';
     data.clientSecret = clientSecret ?? '';
     data.buttonImageUrl = buttonImageUrl ?? '';
@@ -384,26 +384,26 @@ class AdminClient {
     return await client.deleteIdentity(data, options: options);
   }
 
-  /// Please refer to https://docs.auth3.dev/apis/identity-platform/administrative#gettraits
-  Future<grpc_api.GetTraitsResponse> getTraits({String identityId}) async {
+  /// Please refer to https://docs.auth3.dev/apis/identity-platform/administrative#getprofile
+  Future<grpc_api.GetProfileResponse> getProfile({String identityId}) async {
     var client = grpc_api.AdminClient(GrpcClientSingleton(url: url).client);
-    var data = grpc_api.GetTraitsRequest();
+    var data = grpc_api.GetProfileRequest();
 
     data.identityId = identityId;
 
-    return await client.getTraits(data, options: options);
+    return await client.getProfile(data, options: options);
   }
 
-  /// Please refer to https://docs.auth3.dev/apis/identity-platform/administrative#updatetraits
-  Future<grpc_api.UpdateTraitsResponse> updateTraits(
-      {String identityId, String traits}) async {
+  /// Please refer to https://docs.auth3.dev/apis/identity-platform/administrative#updateprofile
+  Future<grpc_api.UpdateProfileResponse> updateProfile(
+      {String identityId, String profile}) async {
     var client = grpc_api.AdminClient(GrpcClientSingleton(url: url).client);
 
-    var data = grpc_api.UpdateTraitsRequest();
+    var data = grpc_api.UpdateProfileRequest();
     data.identityId = identityId;
-    data.traits = traits;
+    data.profile = profile;
 
-    return await client.updateTraits(data, options: options);
+    return await client.updateProfile(data, options: options);
   }
 
   /// Please refer to https://docs.auth3.dev/apis/identity-platform/administrative#getcredentials
@@ -601,13 +601,13 @@ class AdminClient {
   /// Please refer to https://docs.auth3.dev/apis/identity-platform/administrative#updatecredential
   Future<grpc_api.UpdateCredentialResponse> updateCredential(
       {String identityId,
-      String connectionName,
+      String connectionId,
       Map<String, dynamic> data}) async {
     var client = grpc_api.AdminClient(GrpcClientSingleton(url: url).client);
 
     var request = grpc_api.UpdateCredentialRequest();
     request.identityId = identityId;
-    request.connectionId = connectionName;
+    request.connectionId = connectionId;
     request.data = _mapToStruct(data ?? {});
 
     return await client.updateCredential(request, options: options);

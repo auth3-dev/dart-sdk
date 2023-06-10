@@ -76,18 +76,18 @@ class AdminClient extends $grpc.Client {
           ($0.UpdateAddressRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
               $0.UpdateAddressResponse.fromBuffer(value));
-  static final _$getTraits =
-      $grpc.ClientMethod<$0.GetTraitsRequest, $0.GetTraitsResponse>(
-          '/depot.devtools.auth.v0.identity.admin.Admin/GetTraits',
-          ($0.GetTraitsRequest value) => value.writeToBuffer(),
+  static final _$getProfile =
+      $grpc.ClientMethod<$0.GetProfileRequest, $0.GetProfileResponse>(
+          '/depot.devtools.auth.v0.identity.admin.Admin/GetProfile',
+          ($0.GetProfileRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
-              $0.GetTraitsResponse.fromBuffer(value));
-  static final _$updateTraits =
-      $grpc.ClientMethod<$0.UpdateTraitsRequest, $0.UpdateTraitsResponse>(
-          '/depot.devtools.auth.v0.identity.admin.Admin/UpdateTraits',
-          ($0.UpdateTraitsRequest value) => value.writeToBuffer(),
+              $0.GetProfileResponse.fromBuffer(value));
+  static final _$updateProfile =
+      $grpc.ClientMethod<$0.UpdateProfileRequest, $0.UpdateProfileResponse>(
+          '/depot.devtools.auth.v0.identity.admin.Admin/UpdateProfile',
+          ($0.UpdateProfileRequest value) => value.writeToBuffer(),
           ($core.List<$core.int> value) =>
-              $0.UpdateTraitsResponse.fromBuffer(value));
+              $0.UpdateProfileResponse.fromBuffer(value));
   static final _$getCredentials =
       $grpc.ClientMethod<$0.GetCredentialsRequest, $0.GetCredentialsResponse>(
           '/depot.devtools.auth.v0.identity.admin.Admin/GetCredentials',
@@ -309,19 +309,20 @@ class AdminClient extends $grpc.Client {
     return $grpc.ResponseFuture(call);
   }
 
-  $grpc.ResponseFuture<$0.GetTraitsResponse> getTraits(
-      $0.GetTraitsRequest request,
+  $grpc.ResponseFuture<$0.GetProfileResponse> getProfile(
+      $0.GetProfileRequest request,
       {$grpc.CallOptions options}) {
-    final call = $createCall(_$getTraits, $async.Stream.fromIterable([request]),
+    final call = $createCall(
+        _$getProfile, $async.Stream.fromIterable([request]),
         options: options);
     return $grpc.ResponseFuture(call);
   }
 
-  $grpc.ResponseFuture<$0.UpdateTraitsResponse> updateTraits(
-      $0.UpdateTraitsRequest request,
+  $grpc.ResponseFuture<$0.UpdateProfileResponse> updateProfile(
+      $0.UpdateProfileRequest request,
       {$grpc.CallOptions options}) {
     final call = $createCall(
-        _$updateTraits, $async.Stream.fromIterable([request]),
+        _$updateProfile, $async.Stream.fromIterable([request]),
         options: options);
     return $grpc.ResponseFuture(call);
   }
@@ -608,22 +609,22 @@ abstract class AdminServiceBase extends $grpc.Service {
             ($core.List<$core.int> value) =>
                 $0.UpdateAddressRequest.fromBuffer(value),
             ($0.UpdateAddressResponse value) => value.writeToBuffer()));
-    $addMethod($grpc.ServiceMethod<$0.GetTraitsRequest, $0.GetTraitsResponse>(
-        'GetTraits',
-        getTraits_Pre,
+    $addMethod($grpc.ServiceMethod<$0.GetProfileRequest, $0.GetProfileResponse>(
+        'GetProfile',
+        getProfile_Pre,
         false,
         false,
-        ($core.List<$core.int> value) => $0.GetTraitsRequest.fromBuffer(value),
-        ($0.GetTraitsResponse value) => value.writeToBuffer()));
+        ($core.List<$core.int> value) => $0.GetProfileRequest.fromBuffer(value),
+        ($0.GetProfileResponse value) => value.writeToBuffer()));
     $addMethod(
-        $grpc.ServiceMethod<$0.UpdateTraitsRequest, $0.UpdateTraitsResponse>(
-            'UpdateTraits',
-            updateTraits_Pre,
+        $grpc.ServiceMethod<$0.UpdateProfileRequest, $0.UpdateProfileResponse>(
+            'UpdateProfile',
+            updateProfile_Pre,
             false,
             false,
             ($core.List<$core.int> value) =>
-                $0.UpdateTraitsRequest.fromBuffer(value),
-            ($0.UpdateTraitsResponse value) => value.writeToBuffer()));
+                $0.UpdateProfileRequest.fromBuffer(value),
+            ($0.UpdateProfileResponse value) => value.writeToBuffer()));
     $addMethod($grpc.ServiceMethod<$0.GetCredentialsRequest,
             $0.GetCredentialsResponse>(
         'GetCredentials',
@@ -873,15 +874,15 @@ abstract class AdminServiceBase extends $grpc.Service {
     return updateAddress(call, await request);
   }
 
-  $async.Future<$0.GetTraitsResponse> getTraits_Pre($grpc.ServiceCall call,
-      $async.Future<$0.GetTraitsRequest> request) async {
-    return getTraits(call, await request);
+  $async.Future<$0.GetProfileResponse> getProfile_Pre($grpc.ServiceCall call,
+      $async.Future<$0.GetProfileRequest> request) async {
+    return getProfile(call, await request);
   }
 
-  $async.Future<$0.UpdateTraitsResponse> updateTraits_Pre(
+  $async.Future<$0.UpdateProfileResponse> updateProfile_Pre(
       $grpc.ServiceCall call,
-      $async.Future<$0.UpdateTraitsRequest> request) async {
-    return updateTraits(call, await request);
+      $async.Future<$0.UpdateProfileRequest> request) async {
+    return updateProfile(call, await request);
   }
 
   $async.Future<$0.GetCredentialsResponse> getCredentials_Pre(
@@ -1029,10 +1030,10 @@ abstract class AdminServiceBase extends $grpc.Service {
       $grpc.ServiceCall call, $0.GetAddressRequest request);
   $async.Future<$0.UpdateAddressResponse> updateAddress(
       $grpc.ServiceCall call, $0.UpdateAddressRequest request);
-  $async.Future<$0.GetTraitsResponse> getTraits(
-      $grpc.ServiceCall call, $0.GetTraitsRequest request);
-  $async.Future<$0.UpdateTraitsResponse> updateTraits(
-      $grpc.ServiceCall call, $0.UpdateTraitsRequest request);
+  $async.Future<$0.GetProfileResponse> getProfile(
+      $grpc.ServiceCall call, $0.GetProfileRequest request);
+  $async.Future<$0.UpdateProfileResponse> updateProfile(
+      $grpc.ServiceCall call, $0.UpdateProfileRequest request);
   $async.Future<$0.GetCredentialsResponse> getCredentials(
       $grpc.ServiceCall call, $0.GetCredentialsRequest request);
   $async.Future<$0.UpdateCredentialResponse> updateCredential(
